@@ -1,4 +1,4 @@
-{...}:
+{pkgs,...}:
 {
 environment.pathsToLink = [ "/libexec" ];
 
