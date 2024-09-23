@@ -36,7 +36,10 @@
   boot.extraModprobeConfig = ''
   	blacklist nouveau
 	options nouveau modeset=0
+
   '';
+
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia ={
   	package = config.boot.kernelPackages.nvidiaPackages.stable;
 	modesetting.enable = true;
