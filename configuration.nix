@@ -2,26 +2,32 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  home-manager,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./filesystem.nix
-      ./desktop.nix
-      ./nfs4.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./filesystem.nix
+    ./desktop.nix
+    ./nfs4.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-
-
 
   boot.swraid.enable = true;
   boot.swraid.mdadmConf = ''
@@ -29,40 +35,36 @@
     ARRAY /dev/md/NIXSWAP level=raid0 num-devices=2 metadata=1.2 UUID=52cfdedf:9349df8b:fc996bba:c4d0783c
     ARRAY /dev/md/NIXROOT level=raid0 num-devices=2 metadata=1.2 UUID=34277524:7d9ceb21:35ec9aec:1791a2
     MAILADDR danielminks1230@gmail.com
-'';
-
-
+  '';
 
   boot.extraModprobeConfig = ''
-  	blacklist nouveau
-	options nouveau modeset=0
+      	blacklist nouveau
+    	options nouveau modeset=0
 
   '';
 
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia ={
-  	package = config.boot.kernelPackages.nvidiaPackages.stable;
-	modesetting.enable = true;
-	powerManagement.enable = true;
-	powerManagement.finegrained = false;
-	open=false;
-	nvidiaSettings = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
   };
   hardware.opengl = {
-  enable = true;
+    enable = true;
   };
 
   #Networkd setup, includes disabling the networking host
   systemd.network.enable = true;
   networking.useNetworkd = true;
 
-systemd.network.networks."1-enp111s0" = {
+  systemd.network.networks."1-enp111s0" = {
     matchConfig.Name = "enp111s0";
     networkConfig.DHCP = "ipv4";
     linkConfig.RequiredForOnline = "routable";
   };
-
-  
 
   networking.hostName = "minksdHome"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -70,20 +72,17 @@ systemd.network.networks."1-enp111s0" = {
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-   time.timeZone = "America/New_York";
+  time.timeZone = "America/New_York";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -95,63 +94,83 @@ systemd.network.networks."1-enp111s0" = {
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
-   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-   };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
+  fonts.packages = with pkgs; [
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "DroidSansMono"
+        "CascadiaCode"
+      ];
+    })
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users = {
-   	users.minksd= {
-     	isNormalUser = true;
-     	extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     	packages = with pkgs; [
-       	neovim
-	nfs-utils
-	mdadm
-	jdk8
-	jdk22
-	iperf
-	unzip
-	virt-viewer
-	discord
-	firefox
-	gcc
-	git
-	gitleaks
-	google-chrome
-	inetutils
-	kotlin
-	ktorrent
-	ripgrep
-	ruby
-	rustup
-	teams-for-linux
-	wget
-	wine
-	wine64
-	xclip
-	steam
-	android-studio
-	jetbrains.idea-ultimate
-	fd
+  users = {
+    users.minksd = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      packages = with pkgs; [
+        neovim
+        nfs-utils
+        mdadm
+        jdk8
+        jdk22
+        iperf
+        unzip
+        virt-viewer
+        discord
+        firefox
+        gcc
+        git
+        gitleaks
+        google-chrome
+        inetutils
+        kotlin
+        ktorrent
+        ripgrep
+        ruby
+        rustup
+        teams-for-linux
+        wget
+        wine
+        wine64
+        xclip
+        steam
+        android-studio
+        jetbrains.idea-ultimate
+        fd
 
-       
-     	];
-   };
+      ];
+    };
 
-	defaultUserShell = pkgs.zsh;
-   };
+    defaultUserShell = pkgs.zsh;
+  };
   programs.zsh.enable = true;
+
+  #TODO Move packages to home manager
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    users.minksd =
+      { pkgs, ... }:
+      with pkgs;
+      {
+        home.packages = [ ];
+
+      };
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-   	
-	
-   ];
+  environment.systemPackages = with pkgs; [
+
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -171,7 +190,6 @@ systemd.network.networks."1-enp111s0" = {
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -193,4 +211,3 @@ systemd.network.networks."1-enp111s0" = {
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-

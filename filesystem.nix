@@ -1,18 +1,18 @@
-{pkgs,...}:
+{ pkgs, ... }:
 
 {
 
-fileSystems = {
+  fileSystems = {
 
-	"/" = {
-		device = "/dev/disk/by-label/NIXROOT";
-		fsType = "ext4";
-	};
+    "/" = {
+      device = "/dev/disk/by-label/NIXROOT";
+      fsType = "ext4";
+    };
 
-	"/boot" = {
+    "/boot" = {
 
-		device = "/dev/disk/by-label/NIXBOOT";
-		fsType = "vfat";
-	};
-};
+      device = "/dev/disk/by-label/NIXBOOT";
+      fsType = "vfat";
+    };
+  };
 }
