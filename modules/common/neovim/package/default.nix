@@ -7,5 +7,5 @@
 pkgs.neovimBuilder {
   package = pkgs.neovim-unwrapped;
   inherit github;
-  imports = [ ./config/lsp.nix ];
+  imports = [ ../config/lsp.nix ];
 }
