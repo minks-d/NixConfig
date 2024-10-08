@@ -11,6 +11,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/common
     ./modules/nixos
     rec {
+      home-manager.backupFileExtension = "backup";
+      nix.settings.experimental-features = "flakes nix-command"; 
       nixpkgs.overlays = overlays;
       networking.hostName = "minksdHome";
       networking.useNetworkd = true;
@@ -44,6 +46,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         loader = {
 	  efi.canTouchEfiVariables = true;
           systemd-boot.enable = true;
+	  systemd-boot.configurationLimit = 30;
         };
         swraid = {
           enable = true;
@@ -59,7 +62,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           options nouveau modeset=0
         '';
       };
-      swapDevices = [ { device = "/dev/by-label/NIXSWAP"; } ];
+      swapDevices = [ { device = "/dev/md/NIXSWAP"; } ];
 
       services = {
         pipewire = {
@@ -87,7 +90,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       systemd.network = {
         enable = true;
         networks = {
-          "1-enp111s0" = {
+          "01-enp111s0" = {
             matchConfig.Name = "enp111s0";
             networkConfig.DHCP = "ipv4";
             linkConfig.RequiredForOnline = "routable";
@@ -103,8 +106,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       fonts.packages = with specialArgs.pkgs; [
         (nerdfonts.override {
           fonts = [
-            "FiraCode"
-            "DroidSansMono"
             "CascadiaCode"
           ];
         })
@@ -113,6 +114,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       gui.enable = true;
 
       neovim.enable = true;
+      firefox.enable = true;
       discord.enable = true;
       gaming = {
         enable = true;
