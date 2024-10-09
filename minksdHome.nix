@@ -6,7 +6,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     pkgs = import inputs.nixpkgs { inherit system overlays; config = { allowUnfree = true;};};
     upkgs = import inputs.nixpkgs-unstable { inherit system overlays; config = { allowUnfree = true;};};
   };
-  modules = [ 
+  modules =  [ 
     inputs.home-manager.nixosModules.home-manager
     ./modules/common
     ./modules/nixos
@@ -122,6 +122,12 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       programs.zsh.enable = true;
 
+      services.xserver.displayManager.sessionCommands = ''
+        ${specialArgs.pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
+        XTerm*foreground: rgb:211/211/211
+        XTerm*background: rgb:1/2/23
+        EOF
+      '';
     }
   ];
 }

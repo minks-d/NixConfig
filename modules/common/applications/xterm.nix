@@ -13,11 +13,7 @@
   	environment.systemPackages = [
 		pkgs.xterm
 		];
-	home-manager.users.${config.user}.xresources.properties = {
-	  "XTerm*foreground" = "rgb:211/211/211";
-	  "XTerm*background" = "rgb:1/12/19";
-	  "XTerm*faceName" = "Cascadia Code"; 
-	  };
-	};
+		};
+	
 
 }
