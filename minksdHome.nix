@@ -124,8 +124,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       services.xserver.displayManager.sessionCommands = ''
         ${specialArgs.pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
-        XTerm*foreground: rgb:211/211/211
-        XTerm*background: rgb:1/2/23
+        xterm*Foreground: Gainsboro 
+        xterm*background: rgb:1/2/23
         EOF
       '';
     }
