@@ -104,11 +104,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       i18n.defaultLocale = "en_US.UTF-8";
 
       fonts.packages = with specialArgs.pkgs; [
-        (nerdfonts.override {
-          fonts = [
-            "CascadiaCode"
-          ];
-        })
+            cascadia-code
       ];
 
       gui.enable = true;
@@ -125,7 +121,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       services.xserver.displayManager.sessionCommands = ''
         ${specialArgs.pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
         xterm*Foreground: Gainsboro 
-        xterm*background: rgb:1/2/23
+        xterm*background: rgb:1/2/23S
         EOF
       '';
     }
