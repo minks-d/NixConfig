@@ -10,6 +10,14 @@
 	    };
 
   config = lib.mkIf (config.gui.enable && config.xterm.enable){
+  	home-manager.users.${config.user} = {
+		xresources.properties = {
+			"xterm*Foreground" = "Gainsboro";
+			"xterm*background" = "rgb:1/2/23";
+			"xterm*faceName" = "Cascadia Code";
+			"xterm*faceSize" = 11;
+		};
+	};
   	environment.systemPackages = [
 		pkgs.xterm
 		];

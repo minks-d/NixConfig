@@ -112,18 +112,13 @@ inputs.nixpkgs.lib.nixosSystem rec {
       neovim.enable = true;
       firefox.enable = true;
       discord.enable = true;
+      xterm.enable = true;
       gaming = {
         enable = true;
         steam.enable = true;
       };
       programs.zsh.enable = true;
 
-      services.xserver.displayManager.sessionCommands = ''
-        ${specialArgs.pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
-        xterm*Foreground: Gainsboro 
-        xterm*background: rgb:1/2/23S
-        EOF
-      '';
-    }
+          }
   ];
 }
