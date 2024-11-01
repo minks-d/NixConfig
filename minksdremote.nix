@@ -94,6 +94,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       firefox.enable = true;
       programs.zsh.enable = true;
       xterm.enable = true;
+      ssh.server.enable = true;
 
           }
   ];
