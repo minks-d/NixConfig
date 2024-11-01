@@ -53,7 +53,6 @@
     };
     use.lint = {
       linters_by_ft = dsl.toTable {
-        python = [ "ruff" ];
         sh = [ "shellcheck" ];
       };
     };
