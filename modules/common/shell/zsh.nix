@@ -8,7 +8,9 @@
 	  zsh.oh-my-zsh.custom = "/home/${config.user}/.zshrc";
 	  zsh.oh-my-zsh.extraConfig = ''
 	  
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="${pkgs.oh-my-zsh}/share/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+
 alias pushconfig="cd /etc/nixos; sudo git commit -a -m \"$(date -Iminutes -u)\"; sudo git push; cd -"
 alias config="sudo nvim /etc/nixos/"
 alias rebuild="sudo nixos-rebuild --flake /etc/nixos/ switch;"
