@@ -112,6 +112,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       neovim.enable = true;
       firefox.enable = true;
       discord.enable = true;
+      elixir.enable = true;
       xterm.enable = true;
       gaming = {
         enable = true;
