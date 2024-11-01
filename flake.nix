@@ -37,12 +37,14 @@
     rec {
       nixosConfigurations = {
         minksdHome = import ./minksdHome.nix { inherit inputs globals overlays; };
+	minksdremote = import ./minksdremote.nix { inherit inputs globals overlays; };
       };
 
       
 
       homeConfigurations = {
         minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
+        minksdremote = nixosConfigurations.minksdremote.config.home-manager.users.minksd.home;
       };
       packages =
         let

@@ -1,5 +1,19 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 {
+
+options = {
+    desktop = {
+    	i3 = {
+      enable = lib.mkEnableOption {
+        description = "Enable i3 desktop.";
+        default = false;
+      };
+      };
+    };
+  };
+
+
+  config = lib.mkIf (config.gui.enable && config.desktop.i3.enable) {
   environment.pathsToLink = [ "/libexec" ];
   services.displayManager.defaultSession = "none+i3";
   services.xserver = {
@@ -17,5 +31,6 @@
         rofi
       ];
     };
+  };
   };
 }
