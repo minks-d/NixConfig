@@ -31,7 +31,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         };
       };
       boot = {
-        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_10;
+        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_11;
         initrd = {
           availableKernelModules = [
             "xhci_pci"
