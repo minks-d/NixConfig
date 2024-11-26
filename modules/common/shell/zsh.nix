@@ -8,7 +8,7 @@
 	  zsh.oh-my-zsh.custom = "/home/${config.user}/.zshrc";
 	  zsh.oh-my-zsh.extraConfig = ''
 	  
-export ZSH="${pkgs.oh-my-zsh}/share/.oh-my-zsh"
+export ZSH="${pkgs.oh-my-zsh}/share/oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 alias pushconfig="cd /etc/nixos; sudo git commit -a -m \"$(date -Iminutes -u)\"; sudo git push; cd -"

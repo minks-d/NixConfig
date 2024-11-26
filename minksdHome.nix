@@ -1,4 +1,4 @@
-{ globals, inputs, overlays,... }:
+{ globals, inputs, overlays, ... }:
 
 inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
@@ -29,9 +29,15 @@ inputs.nixpkgs.lib.nixosSystem rec {
           device = "/dev/disk/by-label/NIXBOOT";
           fsType = "vfat";
         };
+	"/steam" = {
+		device = "/dev/disk/by-label/SteamGames";
+		fsType = "ntfs-3g";
+		options = [ "rw"   "nofail" "uid=3000" "blksize=65536" ];
+	};
       };
       boot = {
-        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_11;
+        supportedFilesystems = [ "ntfs" ];
+        kernelPackages = specialArgs.upkgs.linuxPackages_latest;
         initrd = {
           availableKernelModules = [
             "xhci_pci"
@@ -77,16 +83,25 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.stable;
-          modesetting.enable = true;
+	  package = boot.kernelPackages.nvidiaPackages.beta;
+	  modesetting.enable = false;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
           open = false;
-          nvidiaSettings = true;
         };
         opengl.enable = true;
       };
 
+      xdg = {
+	      portal = {
+	      	      xdgOpenUsePortal = true;
+		      enable = true;
+		      extraPortals = with specialArgs.pkgs; [xdg-desktop-portal-gtk];
+		      config = {
+			      common.default = ["gtk"];
+		      };
+	      };
+      };
       systemd.network = {
         enable = true;
         networks = {
