@@ -130,6 +130,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       discord.enable = true;
       elixir.enable = true;
       xterm.enable = true;
+      teams.enable = true;
       gaming = {
         enable = true;
         steam.enable = true;

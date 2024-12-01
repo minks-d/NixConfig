@@ -6,5 +6,6 @@
     ./firefox.nix
     ./xterm.nix
     ./elixir.nix
+    ./teams.nix
   ];
 }
