@@ -18,6 +18,6 @@
 	config = lib.mkIf (config.gui.enable && config.teams.enable) {
 
     environment.systemPackages = [ pkgs.teams-for-linux ];
-	}
+	};
 }
  
