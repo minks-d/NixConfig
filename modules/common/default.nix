@@ -12,7 +12,9 @@
     #./programming
     #./repositories
     ./shell
-    ./desktop.nix
+    ./i3.nix
+    ./hyprland.nix
+    ./sway.nix
   ];
   options = {
     user = lib.mkOption {

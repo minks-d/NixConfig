@@ -5,10 +5,12 @@ options = {
     desktop = {
     	i3 = {
       enable = lib.mkEnableOption {
-        description = "Enable i3 desktop.";
+        description = "Enable i3 WM.";
         default = false;
       };
       };
+      
+
     };
   };
 
@@ -33,4 +35,8 @@ options = {
     };
   };
   };
+  
+
+
+
 }

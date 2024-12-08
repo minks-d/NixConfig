@@ -37,7 +37,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       boot = {
         supportedFilesystems = [ "ntfs" ];
-        kernelPackages = specialArgs.upkgs.linuxPackages_latest;
+        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_11;
         initrd = {
           availableKernelModules = [
             "xhci_pci"
@@ -47,7 +47,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           ];
           kernelModules = [ ];
         };
-        kernelModules = [ "kvm-intel" ];
+        kernelModules = [ "i915 nvidia nvidia_modeset nvidia_uvm nvidia_drm" ];
         extraModulePackages = [ ];
         loader = {
 	  efi.canTouchEfiVariables = true;
@@ -64,30 +64,38 @@ inputs.nixpkgs.lib.nixosSystem rec {
             			'';
         };
         extraModprobeConfig = ''
-          blacklist nouveau
+          blacklist nouveau  
+	  blacklist i915
           options nouveau modeset=0
+	  options nvidia-drm modeset=1 fbdev=1
+	  options
         '';
       };
       swapDevices = [ { device = "/dev/md/NIXSWAP"; } ];
 
+      #pipewire/wireplumber
+      security.rtkit.enable = true;
       services = {
         pipewire = {
           enable = true;
           pulse.enable = true;
+	  alsa.enable = true;
+	  alsa.support32Bit = true;
+
         };
-        xserver = {
-          enable = true;
-          videoDrivers = [ "nvidia" ];
-        };
-      };
+              };
+
+      #nvidia/graphics
+      services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-	  package = boot.kernelPackages.nvidiaPackages.beta;
-	  modesetting.enable = false;
+	  package = specialArgs.upkgs.linuxKernel.packages.linux_6_11.nvidia_x11_beta;
+	  modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
           open = false;
+	  nvidiaSettings = true;
         };
         opengl.enable = true;
       };
@@ -124,7 +132,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       gui.enable = true;
 
-      desktop.i3.enable = true;
+      desktop.hyprland.enable = true;
       neovim.enable = true;
       firefox.enable = true;
       discord.enable = true;
