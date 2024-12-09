@@ -65,10 +65,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
         };
         extraModprobeConfig = ''
           blacklist nouveau  
-	  blacklist i915
           options nouveau modeset=0
 	  options nvidia-drm modeset=1 fbdev=1
-	  options
         '';
       };
       swapDevices = [ { device = "/dev/md/NIXSWAP"; } ];
@@ -81,6 +79,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           pulse.enable = true;
 	  alsa.enable = true;
 	  alsa.support32Bit = true;
+	  jack.enable = true;
 
         };
               };
