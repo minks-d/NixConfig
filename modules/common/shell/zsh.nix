@@ -7,7 +7,6 @@
 	  zsh.oh-my-zsh.enable = true;
 	  zsh.oh-my-zsh.custom = "/home/${config.user}/.zshrc";
 	  zsh.oh-my-zsh.extraConfig = ''
-	  
 export ZSH="${pkgs.oh-my-zsh}/share/oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 

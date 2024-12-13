@@ -66,7 +66,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         extraModprobeConfig = ''
           blacklist nouveau  
           options nouveau modeset=0
-	  options nvidia-drm modeset=1 fbdev=1
+	  options nvidia-drm modeset=1 fbdev=0
         '';
       };
       swapDevices = [ { device = "/dev/md/NIXSWAP"; } ];
