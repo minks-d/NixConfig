@@ -16,6 +16,7 @@
 		environment.systemPackages = [
 			pkgs.wofi
 			pkgs.pavucontrol
+			pkgs.hyprland
 		];
 		environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

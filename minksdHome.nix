@@ -96,7 +96,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           open = false;
 	  nvidiaSettings = true;
         };
-        opengl.enable = true;
+        graphics.enable = true;
       };
 
       xdg = {

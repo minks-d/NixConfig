@@ -27,7 +27,7 @@
     environment.systemPackages = with pkgs; [
 
       # Enable terminal interaction
-      steamPackages.steamcmd
+      steamcmd
       steam-tui
 
       # Overlay with performance monitoring
