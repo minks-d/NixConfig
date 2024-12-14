@@ -1,0 +1,9 @@
+
+#############################
+### ENVIRONMENT VARIABLES ###
+#############################
+
+# See https://wiki.hyprland.org/Configuring/Environment-variables/
+
+export HYPRCURSOR_SIZE=22
+export HYPRCURSOR_THEME=Bibata-Modern-Classic
