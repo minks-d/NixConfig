@@ -3,56 +3,62 @@
   pkgs,
   lib,
   ...
-}:
-
-let
-
-  neovim = import ./package {
-    inherit pkgs;
-    github = true;
-  };
-in
-{
-
+}: {
   options.neovim.enable = lib.mkEnableOption "Neovim.";
 
   config = lib.mkIf config.neovim.enable {
-    home-manager.users.${config.user} =
+    environment.systemPackages = with pkgs; [
+      nil
+      alejandra
+      stylua
+      ripgrep
+      fd
+    ];
+    home-manager.users.${config.user} = {config, ...}: {
+      programs.neovim.enable = true;
+      programs.neovim.extraLuaConfig = ''
+        vim.opt.scrolloff = 15
+        vim.opt.number = true
+        vim.opt.relativenumber = true
+        require'lspconfig'.nil_ls.setup{}
 
-      {
+        vim.opt.completeopt=menu,menuone,noselect
+        ${builtins.readFile ./lua/cmp.lua}
+        ${builtins.readFile ./lua/conform.lua}
+        ${builtins.readFile ./lua/telescope.lua}
 
-        home.packages = [ neovim ];
 
-        # Use Neovim as the editor for git commit messages
-        programs.git.extraConfig.core.editor = "nvim";
 
-        # Set Neovim as the default app for text editing and manual pages
-        home.sessionVariables = {
-          EDITOR = "nvim";
-          MANPAGER = "nvim +Man!";
-        };
+      '';
+      programs.neovim.plugins = with pkgs.vimPlugins; [
+        nvim-cmp
+        #plugins for nvim-cmp
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        cmp-cmdline
 
-        # Create quick aliases for launching Neovim
-        programs.zsh = {
-          shellAliases = {
-            vim = "nvim";
-          };
-                  };
+        nvim-lspconfig
+        nvim-treesitter
+        conform-nvim
+        telescope-nvim
+      ];
 
-        # Create a desktop option for launching Neovim from a file manager
-        # (Requires launching the terminal and then executing Neovim)
-        xdg.desktopEntries.nvim = lib.mkIf pkgs.stdenv.isLinux {
-          name = "Neovim wrapper";
-          exec = "xterm nvim %F";
-          mimeType = [
-            "text/plain"
-            "text/markdown"
-          ];
-        };
-        xdg.mimeApps.defaultApplications = lib.mkIf pkgs.stdenv.isLinux {
-          "text/plain" = [ "nvim.desktop" ];
-          "text/markdown" = [ "nvim.desktop" ];
+      # Use Neovim as the editor for git commit messages
+      programs.git.extraConfig.core.editor = "nvim";
+
+      # Set Neovim as the default app for text editing and manual pages
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        MANPAGER = "nvim +Man!";
+      };
+
+      # Create quick aliases for launching Neovim
+      programs.zsh = {
+        shellAliases = {
+          vim = "nvim";
         };
       };
+    };
   };
 }

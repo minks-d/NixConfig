@@ -67,7 +67,7 @@
     dotfilesPath = lib.mkOption {
       type = lib.types.path;
       description = "Path of dotfiles repository.";
-      default = "/etc/nixos";
+      default = ../../dotfiles;
     };
     dotfilesRepo = lib.mkOption {
       type = lib.types.str;
