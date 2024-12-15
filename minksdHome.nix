@@ -9,11 +9,17 @@ inputs.nixpkgs.lib.nixosSystem rec {
   specialArgs = {
     pkgs = import inputs.nixpkgs {
       inherit system overlays;
-      config = {allowUnfree = true;};
+      config = {
+        allowUnfree = true;
+        #allowBroken = true;
+      };
     };
     upkgs = import inputs.nixpkgs-unstable {
       inherit system overlays;
-      config = {allowUnfree = true;};
+      config = {
+        allowUnfree = true;
+        #allowBroken = true;
+      };
     };
   };
   modules = [
@@ -96,7 +102,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-          package = specialArgs.upkgs.linuxKernel.packages.linux_6_12.nvidia_x11_beta;
+          package = boot.kernelPackages.nvidiaPackages.stable;
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
