@@ -149,6 +149,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       gaming = {
         enable = true;
         steam.enable = true;
+        lutris.enable = true;
       };
     }
   ];

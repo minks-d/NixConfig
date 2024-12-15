@@ -3,11 +3,10 @@
   pkgs,
   lib,
   ...
-}:
-{
-
+}: {
   imports = [
     ./steam.nix
+    ./lutris.nix
   ];
 
   options.gaming.enable = lib.mkEnableOption "Enable gaming features.";
