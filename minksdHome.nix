@@ -45,7 +45,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       boot = {
         supportedFilesystems = ["ntfs"];
-        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_11;
+        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_12;
         initrd = {
           availableKernelModules = [
             "xhci_pci"
@@ -96,7 +96,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-          package = specialArgs.upkgs.linuxKernel.packages.linux_6_11.nvidia_x11_beta;
+          package = specialArgs.upkgs.linuxKernel.packages.linux_6_12.nvidia_x11_beta;
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
