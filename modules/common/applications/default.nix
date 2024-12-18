@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./discord.nix
+    ./zoom.nix
     ./firefox.nix
     ./xterm.nix
     ./elixir.nix

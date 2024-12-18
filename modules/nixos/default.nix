@@ -1,12 +1,10 @@
-{ ... }:
-{
-
+{...}: {
   imports = [
     #./applications
     ./gaming
     #./graphical
     #./hardware
-    #./services
+    ./services
     ./system
   ];
 }

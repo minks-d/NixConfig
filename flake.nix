@@ -10,18 +10,16 @@
       url = "github:/nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix2vim = {
-      url = "github:gytis-ivaskevicius/nix2vim";
+    nur = {
+      url = "github:nix-community/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/nur";
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
     overlays = [
-      inputs.nix2vim.overlay
-      inputs.nur.overlay
+      inputs.nur.overlays.default
     ];
     globals = let
       baseName = "minksulivarri.com";

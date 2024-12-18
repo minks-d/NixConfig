@@ -1,11 +1,12 @@
-{lib, config, pkgs,...}:
-
 {
-	config = {
-	home-manager.users.${config.user} = {
-	  home.packages = with pkgs; [
-	  xclip
-	  ];
-	};
-	};
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  config = {
+    environment.systemPackages = with pkgs; [
+      wl-clipboard
+    ];
+  };
 }
