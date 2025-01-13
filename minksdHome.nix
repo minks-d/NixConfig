@@ -78,8 +78,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
           '';
         };
         extraModprobeConfig = ''
-                 blacklist nouveau
-                 options nouveau modeset=0
+          blacklist nouveau
+          options nouveau modeset=0
           options nvidia-drm modeset=1 fbdev=0
         '';
       };
@@ -95,6 +95,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
           alsa.support32Bit = true;
           jack.enable = true;
         };
+        udev.extraRules = ''
+          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+        '';
       };
 
       #nvidia/graphics
