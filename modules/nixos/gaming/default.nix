@@ -7,6 +7,7 @@
   imports = [
     ./steam.nix
     ./lutris.nix
+    ./gfn.nix
   ];
 
   options.gaming.enable = lib.mkEnableOption "Enable gaming features.";

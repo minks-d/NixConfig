@@ -105,7 +105,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.stable;
+          package = boot.kernelPackages.nvidiaPackages.beta;
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
@@ -160,6 +160,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       gaming = {
         enable = true;
         steam.enable = true;
+        gfn.enable = true;
         lutris.enable = true;
       };
     }
