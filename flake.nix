@@ -14,12 +14,16 @@
       url = "github:nix-community/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri = {
+      url = "github:/sodiboo/niri-flake";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
     overlays = [
       inputs.nur.overlays.default
+      inputs.niri.overlays.niri
     ];
     globals = let
       baseName = "minksulivarri.com";

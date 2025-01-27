@@ -7,13 +7,7 @@
 inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
   specialArgs = {
-    pkgs = import inputs.nixpkgs {
-      inherit system overlays;
-      config = {
-        allowUnfree = true;
-        #allowBroken = true;
-      };
-    };
+    inherit inputs;
     upkgs = import inputs.nixpkgs-unstable {
       inherit system overlays;
       config = {
@@ -22,14 +16,16 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
     };
   };
-  modules = [
+  modules = with specialArgs.upkgs; [
     inputs.home-manager.nixosModules.home-manager
+    inputs.niri.nixosModules.niri
     ./modules/common
     ./modules/nixos
     rec {
       home-manager.backupFileExtension = "backup";
       nix.settings.experimental-features = "flakes nix-command";
       nixpkgs.overlays = overlays;
+      nixpkgs.config.allowUnfree = true;
       networking.hostName = "minksdHome";
       networking.useNetworkd = true;
 
@@ -61,7 +57,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           ];
           kernelModules = [];
         };
-        kernelModules = ["i915 nvidia nvidia_modeset nvidia_uvm nvidia_drm"];
+        kernelModules = ["i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
         extraModulePackages = [];
         loader = {
           efi.canTouchEfiVariables = true;
@@ -119,7 +115,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         portal = {
           xdgOpenUsePortal = true;
           enable = true;
-          extraPortals = with specialArgs.pkgs; [xdg-desktop-portal-gtk];
+          extraPortals = with nixpkgs; [xdg-desktop-portal-gtk];
           config = {
             common.default = ["gtk"];
           };
@@ -140,13 +136,13 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       i18n.defaultLocale = "en_US.UTF-8";
 
-      fonts.packages = with specialArgs.pkgs; [
+      fonts.packages = with nixpkgs; [
         cascadia-code
       ];
 
       gui.enable = true;
 
-      desktop.hyprland.enable = true;
+      desktop.niri.enable = true;
       foot.enable = true;
       zsh.enable = true;
       neovim.enable = true;

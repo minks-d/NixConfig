@@ -10,5 +10,6 @@
     ./i3.nix
     ./neovim
     ./sway.nix
+    ./niri.nix
   ];
 }
