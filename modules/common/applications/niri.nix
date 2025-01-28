@@ -26,6 +26,7 @@
     services.displayManager.enable = true;
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
+    environment.variables.NIXOS_OZONE_WL = "1";
 
     home-manager.users.${config.user} = {config, ...}: {
       nixpkgs.overlays = [inputs.niri.overlays.niri];
@@ -38,6 +39,17 @@
           "Mod+F".action = config.lib.niri.actions.fullscreen-window;
           "Ctrl+Shift+P".action = config.lib.niri.actions.screenshot;
         };
+        spawn-at-startup = [
+          {
+            command = [
+              "xwayland-satellite"
+            ];
+          }
+        ];
+        environment = {
+          DISPLAY = ":0";
+        };
+
         outputs = {
           "DP-2" = {
             mode = {
