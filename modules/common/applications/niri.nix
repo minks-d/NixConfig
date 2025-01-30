@@ -20,6 +20,7 @@
       bibata-cursors
       fuzzel
       xwayland-satellite
+      swaylock
     ];
     programs.niri.enable = true;
     programs.niri.package = pkgs.niri-unstable;
@@ -35,6 +36,7 @@
         binds = {
           "Mod+Q".action.spawn = "foot";
           "Mod+R".action.spawn = "fuzzel";
+          "Mod+L".action.spawn = "swaylock";
           "Mod+C".action = config.lib.niri.actions.close-window;
           "Mod+F".action = config.lib.niri.actions.fullscreen-window;
           "Ctrl+Shift+P".action = config.lib.niri.actions.screenshot;
