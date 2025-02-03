@@ -11,5 +11,6 @@
     ./neovim
     ./sway.nix
     ./niri.nix
+    ./waybar
   ];
 }

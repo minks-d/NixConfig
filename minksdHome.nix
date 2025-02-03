@@ -143,6 +143,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       gui.enable = true;
 
       desktop.niri.enable = true;
+      waybar.enable = true;
       foot.enable = true;
       zsh.enable = true;
       neovim.enable = true;

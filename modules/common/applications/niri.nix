@@ -24,6 +24,7 @@
     ];
     programs.niri.enable = true;
     programs.niri.package = pkgs.niri-unstable;
+
     services.displayManager.enable = true;
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
