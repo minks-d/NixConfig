@@ -36,9 +36,11 @@
         binds = {
           "Mod+Q".action.spawn = "foot";
           "Mod+R".action.spawn = "fuzzel";
-          "Mod+L".action.spawn = "swaylock";
-          "Mod+C".action = config.lib.niri.actions.close-window;
+          "Mod+Shift+L".action.spawn = "swaylock";
           "Mod+F".action = config.lib.niri.actions.fullscreen-window;
+          "Mod+C".action = config.lib.niri.actions.close-window;
+          "Mod+H".action = config.lib.niri.actions.focus-column-left;
+          "Mod+L".action = config.lib.niri.actions.focus-column-right;
           "Ctrl+Shift+P".action = config.lib.niri.actions.screenshot;
         };
         spawn-at-startup = [
@@ -57,14 +59,14 @@
             mode = {
               width = 1920;
               height = 1080;
-              refresh = 75.0;
+              refresh = 75.001;
             };
           };
           "HDMI-A-4" = {
             mode = {
               width = 1600;
               height = 900;
-              refresh = 75.0;
+              refresh = 74.889;
             };
             position = {
               x = -1920;
