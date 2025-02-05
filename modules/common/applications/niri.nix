@@ -62,6 +62,10 @@
               height = 1080;
               refresh = 75.001;
             };
+            position = {
+              x = 1600;
+              y = 0;
+            };
           };
           "HDMI-A-4" = {
             mode = {
@@ -70,7 +74,7 @@
               refresh = 74.889;
             };
             position = {
-              x = -1920;
+              x = 0;
               y = 0;
             };
           };
