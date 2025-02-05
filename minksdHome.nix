@@ -57,7 +57,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           ];
           kernelModules = [];
         };
-        kernelModules = ["i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+        kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "i915"];
         extraModulePackages = [];
         loader = {
           efi.canTouchEfiVariables = true;
