@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-{
-
+}: {
   options.gaming.steam.enable = lib.mkEnableOption "Steam game launcher.";
 
   config = lib.mkIf (config.gaming.steam.enable && pkgs.stdenv.isLinux) {
@@ -20,12 +18,12 @@
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
-      extraCompatPackages = [ pkgs.proton-ge-bin ];
+      extraCompatPackages = [pkgs.proton-ge-bin];
       gamescopeSession.enable = true;
     };
+    programs.gamescope.capSysNice = true;
 
     environment.systemPackages = with pkgs; [
-
       # Enable terminal interaction
       steamcmd
       steam-tui

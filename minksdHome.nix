@@ -22,6 +22,12 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/common
     ./modules/nixos
     rec {
+      environment.systemPackages = with pkgs; [
+        inputs.grayjay.packages.x86_64-linux.grayjay-desktop
+        mariadb_114
+        dbeaver-bin
+      ];
+
       home-manager.backupFileExtension = "backup";
       nix.settings.experimental-features = "flakes nix-command";
       nixpkgs.overlays = overlays;
@@ -91,6 +97,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
           alsa.support32Bit = true;
           jack.enable = true;
         };
+        mysql.enable = true;
+        mysql.package = pkgs.mariadb;
+        mysql.user = "minksd";
+
         udev.extraRules = ''
           KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
         '';

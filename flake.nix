@@ -17,6 +17,9 @@
     niri = {
       url = "github:/sodiboo/niri-flake";
     };
+    grayjay = {
+      url = "git+https://codeberg.org/quasigod/nur/";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
