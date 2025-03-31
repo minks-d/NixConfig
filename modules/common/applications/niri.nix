@@ -38,6 +38,7 @@
           "Mod+Q".action.spawn = "foot";
           "Mod+R".action.spawn = "fuzzel";
           "Mod+Shift+L".action.spawn = "swaylock";
+          "Mod+P".action = config.lib.niri.actions.quit;
           "Mod+F".action = config.lib.niri.actions.fullscreen-window;
           "Mod+C".action = config.lib.niri.actions.close-window;
           "Mod+H".action = config.lib.niri.actions.focus-column-left;
@@ -81,8 +82,10 @@
         };
         cursor.size = 22;
         cursor.theme = "Bibata-Modern-Classic";
+        layout.border.active = 0;
+        layout.border.inactive = 2;
         layout.center-focused-column = "never";
-        layout.default-column-width.proportion = 0.45;
+        layout.default-column-width.proportion = 0.75;
         input.focus-follows-mouse.enable = true;
       };
     };

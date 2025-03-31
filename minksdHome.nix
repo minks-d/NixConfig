@@ -23,7 +23,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/nixos
     rec {
       environment.systemPackages = with pkgs; [
-        inputs.grayjay.packages.x86_64-linux.grayjay-desktop
+        inputs.grayjay.packages.x86_64-linux.grayjay
         mariadb_114
         dbeaver-bin
       ];
@@ -97,9 +97,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
           alsa.support32Bit = true;
           jack.enable = true;
         };
-        mysql.enable = true;
-        mysql.package = pkgs.mariadb;
-        mysql.user = "minksd";
 
         udev.extraRules = ''
           KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
@@ -125,7 +122,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
         portal = {
           xdgOpenUsePortal = true;
           enable = true;
-          extraPortals = with nixpkgs; [xdg-desktop-portal-gtk];
+          extraPortals = with nixpkgs; [
+            kdePackages.xdg-desktop-portal-kde
+          ];
           config = {
             common.default = ["gtk"];
           };
