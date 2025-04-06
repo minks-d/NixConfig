@@ -24,8 +24,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
     rec {
       environment.systemPackages = with pkgs; [
         inputs.grayjay.packages.x86_64-linux.grayjay
-        mariadb_114
-        dbeaver-bin
       ];
 
       home-manager.backupFileExtension = "backup";
@@ -90,6 +88,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
       #pipewire/wireplumber
       security.rtkit.enable = true;
       services = {
+        mysql = {
+          enable = true;
+          package = pkgs.mariadb;
+        };
         pipewire = {
           enable = true;
           pulse.enable = true;
