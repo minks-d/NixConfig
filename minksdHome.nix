@@ -24,6 +24,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
     rec {
       environment.systemPackages = with pkgs; [
         inputs.grayjay.packages.x86_64-linux.grayjay
+        unison
+        vial
       ];
 
       home-manager.backupFileExtension = "backup";
