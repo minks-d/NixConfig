@@ -23,7 +23,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/nixos
     rec {
       environment.systemPackages = with pkgs; [
-        inputs.grayjay.packages.x86_64-linux.grayjay
         unison
         vial
       ];
@@ -53,7 +52,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       boot = {
         supportedFilesystems = ["ntfs"];
-        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_11;
+        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_13;
         initrd = {
           availableKernelModules = [
             "xhci_pci"
