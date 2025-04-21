@@ -23,6 +23,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/nixos
     rec {
       environment.systemPackages = with pkgs; [
+        jetbrains.idea-ultimate
         unison
         vial
       ];

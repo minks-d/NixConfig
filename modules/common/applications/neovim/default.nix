@@ -8,11 +8,17 @@
 
   config = lib.mkIf config.neovim.enable {
     environment.systemPackages = with pkgs; [
+      #Code formatters
       nil
       alejandra
       stylua
+
+      #Search functionalities
       ripgrep
       fd
+      #LSPs
+      clang-tools #C,C++
+      jdt-language-server #Java
     ];
     home-manager.users.${config.user} = {config, ...}: {
       programs.neovim.enable = true;
@@ -26,6 +32,7 @@
         ${builtins.readFile ./lua/cmp.lua}
         ${builtins.readFile ./lua/conform.lua}
         ${builtins.readFile ./lua/telescope.lua}
+        ${builtins.readFile ./lua/nvim-lspconfig.lua}
 
 
 
