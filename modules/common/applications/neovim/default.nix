@@ -16,6 +16,7 @@
       #Search functionalities
       ripgrep
       fd
+
       #LSPs
       clang-tools #C,C++
       jdt-language-server #Java

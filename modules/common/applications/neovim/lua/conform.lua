@@ -6,7 +6,7 @@ conform.setup({
 		lua = { "stylua" },
 		-- Conform will run multiple formatters sequentially
 		nix = { "alejandra" },
-		c = { clang - formate },
+		c = { "clang-format" },
 	},
 
 	-- Set this to change the default values when calling conform.format()
