@@ -34,6 +34,7 @@
         ${builtins.readFile ./lua/conform.lua}
         ${builtins.readFile ./lua/telescope.lua}
         ${builtins.readFile ./lua/nvim-lspconfig.lua}
+        ${builtins.readFile ./lua/diagnostic.lua}
 
 
 
