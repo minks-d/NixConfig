@@ -128,6 +128,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           enable = true;
           extraPortals = with nixpkgs; [
             kdePackages.xdg-desktop-portal-kde
+            xdg-desktop-portal
           ];
           config = {
             common.default = ["gtk"];
