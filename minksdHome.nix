@@ -26,6 +26,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
         jetbrains.idea-ultimate
         unison
         vial
+
+        vulkan-tools
       ];
 
       home-manager.backupFileExtension = "backup";
@@ -63,7 +65,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           ];
           kernelModules = [];
         };
-        kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "i915"];
+        kernelModules = ["nouveau" "i915"];
         extraModulePackages = [];
         loader = {
           efi.canTouchEfiVariables = true;
@@ -80,9 +82,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           '';
         };
         extraModprobeConfig = ''
-          blacklist nouveau
-          options nouveau modeset=0
-          options nvidia-drm modeset=1 fbdev=0
+          options nouveau modeset=1
         '';
       };
       swapDevices = [{device = "/dev/md/NIXSWAP";}];
@@ -108,18 +108,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
 
       #nvidia/graphics
-      services.xserver.videoDrivers = ["nvidia"];
+      #services.xserver.videoDrivers = ["nouveau"];
       hardware = {
-        cpu.intel.updateMicrocode = true;
-        nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.vulkan_beta;
-          modesetting.enable = true;
-          powerManagement.enable = true;
-          powerManagement.finegrained = false;
-          open = false;
-          nvidiaSettings = true;
+        graphics = {
+          enable = true;
         };
-        graphics.enable = true;
       };
 
       xdg = {

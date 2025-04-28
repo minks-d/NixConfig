@@ -26,8 +26,7 @@
     programs.niri.package = pkgs.niri-unstable;
 
     services.displayManager.enable = true;
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
+    services.displayManager.cosmic-greeter.enable = true;
     environment.variables.NIXOS_OZONE_WL = "1";
 
     home-manager.users.${config.user} = {config, ...}: {
