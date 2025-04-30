@@ -53,7 +53,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       boot = {
         supportedFilesystems = ["ntfs"];
-        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_13;
+        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_14;
         initrd = {
           availableKernelModules = [
             "xhci_pci"
@@ -139,8 +139,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
         enable = true;
         networks = {
           "01-enp111s0" = {
+            enable = true;
             matchConfig.Name = "enp111s0";
-            networkConfig.DHCP = "ipv4";
+            address = ["192.0.0.7/24"];
+            gateway = ["192.0.0.1"];
+            dns = ["192.0.0.1"];
             linkConfig.RequiredForOnline = "routable";
           };
         };
