@@ -23,9 +23,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/nixos
     rec {
       environment.systemPackages = with pkgs; [
+        grayjay
         jetbrains.idea-ultimate
         unison
         vial
+        emacs
       ];
 
       home-manager.backupFileExtension = "backup";
@@ -120,6 +122,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
           nvidiaSettings = true;
         };
         graphics.enable = true;
+        graphics.enable32Bit = true;
       };
 
       xdg = {
