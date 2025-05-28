@@ -114,7 +114,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.vulkan_beta;
+          package = boot.kernelPackages.nvidiaPackages.beta;
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
@@ -122,7 +122,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
           nvidiaSettings = true;
         };
         graphics.enable = true;
-        graphics.enable32Bit = true;
+	graphics.enable32Bit = true;
+
       };
 
       xdg = {
