@@ -5,8 +5,19 @@
   ...
 }: {
   imports = [
-    ./applications
-    ./shell
+  ./discord.nix
+  ./elixir.nix
+  ./extras.nix
+./firefox.nix
+./foot
+  ./neovim
+  ./ssh.nix
+  ./sway.nix
+  ./teams.nix
+  ./waybar
+  ./xterm.nix
+  ./zoom.nix
+  ./zsh
   ];
   options = {
     user = lib.mkOption {
@@ -17,6 +28,7 @@
     fullName = lib.mkOption {
       type = lib.types.str;
       description = "Human readable name of the user";
+      default = "Daniel Minks";
     };
     userDirs = {
       # Required to prevent infinite recursion when referenced by himalaya

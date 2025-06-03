@@ -29,7 +29,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         vial
         emacs
       ];
-
+      system.stateVersion = "24.04";
       home-manager.backupFileExtension = "backup";
       nix.settings.experimental-features = "flakes nix-command";
       nixpkgs.overlays = overlays;
@@ -175,12 +175,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
       xterm.enable = true;
       flatpak.enable = true;
       teams.enable = true;
-      gaming = {
-        enable = true;
-        steam.enable = true;
-        gfn.enable = true;
-        lutris.enable = true;
-      };
-    }
+      steam.enable = true;
+      lutris.enable = true;
+        }
   ];
 }

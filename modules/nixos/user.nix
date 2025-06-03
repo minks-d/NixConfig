@@ -36,10 +36,6 @@
     };
     users.groups.minksd = {};
 
-    # Allow writing custom scripts outside of Nix
-    # Probably shouldn't make this a habit
-    environment.localBinInPath = true;
-
     home-manager.users.minksd.xdg = {
 
       # Allow Nix to manage the default applications list

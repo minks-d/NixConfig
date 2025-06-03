@@ -5,9 +5,9 @@
   lib,
   ...
 }: {
-  options.gaming.lutris.enable = lib.mkEnableOption "Lutris game launcher.";
+  options.lutris.enable = lib.mkEnableOption "Lutris game launcher.";
 
-  config = lib.mkIf (config.gaming.lutris.enable && pkgs.stdenv.isLinux) {
+  config = lib.mkIf (config.lutris.enable && pkgs.stdenv.isLinux) {
     environment.systemPackages = with upkgs; [
       lutris
       wineWowPackages.waylandFull

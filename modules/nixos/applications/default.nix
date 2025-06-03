@@ -1,5 +1,0 @@
-{}: {
-  modules = [
-    ./grayjay.nix
-  ];
-}
