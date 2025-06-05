@@ -18,6 +18,7 @@
   ./xterm.nix
   ./zoom.nix
   ./zsh
+  ./emacs
   ];
   options = {
     user = lib.mkOption {

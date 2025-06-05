@@ -27,7 +27,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
         jetbrains.idea-ultimate
         unison
         vial
-        emacs
       ];
       system.stateVersion = "24.04";
       home-manager.backupFileExtension = "backup";
@@ -167,7 +166,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       waybar.enable = true;
       foot.enable = true;
       zsh.enable = true;
-      neovim.enable = true;
+      emacs.enable = true;
       firefox.enable = true;
       discord.enable = true;
       zoom.enable = true;
