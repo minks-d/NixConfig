@@ -14,10 +14,11 @@
 
       #Packages to install
       emacsPackages.nix-mode
+      emacsPackages.lsp-mode
 
     ];
     home-manager.users.${config.user} = {
-      home.file.".emacs.el".source = ./init.el;
+      home.file.".emacs.d/init.el".source = ./init.el;
     };
   };
 }

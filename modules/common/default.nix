@@ -19,6 +19,7 @@
   ./zoom.nix
   ./zsh
   ./emacs
+  ./rust
   ];
   options = {
     user = lib.mkOption {

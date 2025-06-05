@@ -1,9 +1,14 @@
 {
   description = "Flake configuration for Daniel Minks PC";
-
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
   inputs = rec {
-    # NixOS official package source, using the nixos-24.05 branch here
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
@@ -19,30 +24,34 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-  };
-
-  outputs = {nixpkgs, ...} @ inputs: let
-    system = "x86_64-linux";
-    overlays = [
-      inputs.nur.overlays.default
-      inputs.niri.overlays.niri
-    ];
-    globals = let
-      baseName = "minksulivarri.com";
-    in rec {
-      user = "minksd";
-      fullName = "Daniel Minks";
-      gitName = fullName;
+    fenix = {
+      url = "github:/nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+  };
+outputs = {nixpkgs, ...} @ inputs: let
+  system = "x86_64-linux";
+  overlays = [
+    inputs.nur.overlays.default
+    inputs.niri.overlays.niri
+    inputs.fenix.overlays.default
+  ];
+  globals = let
+    baseName = "minksulivarri.com";
   in rec {
-    nixosConfigurations = {
-      minksdHome = import ./minksdHome.nix {inherit inputs globals overlays;};
-    };
-    homeConfigurations = {
-      minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
-    };
-    packages = {
-      minksdHome = system: import ./minksdHome.nix {inherit inputs globals overlays;};
-    };
+    user = "minksd";
+    fullName = "Daniel Minks";
+    gitName = fullName;
   };
+in rec {
+  nixosConfigurations = {
+    minksdHome = import ./minksdHome.nix {inherit inputs globals overlays;};
+  };
+  homeConfigurations = {
+    minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
+  };
+  packages = {
+    minksdHome = system: import ./minksdHome.nix {inherit inputs globals overlays;};
+  };
+};
 }
