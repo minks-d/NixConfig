@@ -33,8 +33,8 @@
 (use-package nix-mode
   :mode "\\.nix\\'")
 ;;Adds flycheck for inline syntax checking
-(use-package flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package flycheck
+  :init (global-flycheck-mode))
 
 (provide 'init)
 ;;;

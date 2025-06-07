@@ -15,6 +15,7 @@
       #Packages to install
       emacsPackages.nix-mode
       emacsPackages.lsp-mode
+      emacsPackages.flycheck
 
     ];
     home-manager.users.${config.user} = {
