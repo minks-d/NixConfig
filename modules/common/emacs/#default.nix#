@@ -10,13 +10,13 @@
   };
   config = lib.mkIf (config.emacs.enable == true) {
     environment.systemPackages = with pkgs;[
-      emacs-pgtk
+      emacs-gtk
 
       #Packages to install
       emacsPackages.nix-mode
-      emacsPackages.lsp-ui
       emacsPackages.lsp-mode
       emacsPackages.flycheck
+
     ];
     home-manager.users.${config.user} = {
       home.file.".emacs.d/init.el".source = ./init.el;

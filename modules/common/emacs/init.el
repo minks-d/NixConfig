@@ -1,4 +1,6 @@
-;;; -*- lexical-binding: t -*-
+;;; init.el --- initialization of emacs configuration -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -27,14 +29,19 @@
 
 ;;Enable lsp-mode globally, installed in ./default.nix
 (use-package lsp-mode)
-;;Rust Configuration
-(load "~/.emacs.d/rust.el")
+;;Adds flycheck for inline syntax checking
+(use-package flycheck
+  :after lsp-mode
+  :hook (after-init . global-flycheck-mode)
+  :custom (flycheck-emacs-lisp-load-path 'inherit))
+;;Enable lsp-ui for integration with flycheck
+(use-package lsp-ui
+  :after flycheck)
 ;;Enable the nix-mode package, installed in ./default.nix
 (use-package nix-mode
   :mode "\\.nix\\'")
-;;Adds flycheck for inline syntax checking
-(use-package flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;Rust Configuration
+(load "~/.emacs.d/rust.el")
 
 (provide 'init)
-;;;
+;;; init.el ends here

@@ -12,7 +12,9 @@
   config = lib.mkIf (config.rust.enable) {
     environment.systemPackages = with upkgs; [
       emacsPackages.rustic
+      emacsPackages.cargo
       emacsPackages.flycheck-rust
+      emacsPackages.toml-mode
 
       rust-analyzer-nightly
       
