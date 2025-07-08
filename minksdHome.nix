@@ -158,6 +158,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       fonts.packages = with nixpkgs; [
         cascadia-code
+        ipaexfont
       ];
 
       gui.enable = true;
