@@ -54,7 +54,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       boot = {
         supportedFilesystems = ["ntfs"];
-        kernelPackages = specialArgs.upkgs.linuxKernel.packages.linux_6_14;
+        kernelPackages = upkgs.linuxPackages_testing; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
         initrd = {
           availableKernelModules = [
             "xhci_pci"
