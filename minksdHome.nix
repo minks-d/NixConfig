@@ -54,7 +54,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       boot = {
         supportedFilesystems = ["ntfs"];
-        kernelPackages = specialArgs.upkgs.linuxPackages_testing; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
+        kernelPackages = specialArgs.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
         initrd = {
           availableKernelModules = [
             "xhci_pci"
@@ -144,9 +144,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
           "01-enp111s0" = {
             enable = true;
             matchConfig.Name = "enp111s0";
-            address = ["192.0.0.7/24"];
-            gateway = ["192.0.0.1"];
-            dns = ["192.0.0.1"];
+            address = ["192.168.1.253/24"];
+            gateway = ["192.168.1.1"];
+            dns = ["1.1.1.1"];
             linkConfig.RequiredForOnline = "routable";
           };
         };
