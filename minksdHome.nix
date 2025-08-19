@@ -113,7 +113,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware = {
         cpu.intel.updateMicrocode = true;
         nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.beta;
+          package = boot.kernelPackages.nvidiaPackages.latest;
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
