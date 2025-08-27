@@ -21,7 +21,7 @@
 (setq backup-directory-alist '(("." . "~/.backups")))
 ;;Delete autosave files after buffer is closed
 (setq kill-buffer-delete-auto-save-files 1)
-(setq delete-auto-save-files nil)
+(setq delete-auto-save-files t)
 
 ;;------Programming------
 
