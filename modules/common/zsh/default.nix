@@ -30,9 +30,10 @@
 
                  source $ZSH/oh-my-zsh.sh
 
+                 alias emacs="emacs -nw"
                  alias config-edit="emacs /home/minksd/nixos/"
-                 alias config-test="sudo nixos-rebuild --flake /home/minksd/nixos test;
-                 alias config-rebuild="sudo nixos-rebuild --flake /home/minksd/nixos/ boot;"
+                 alias config-test="sudo nixos-rebuild --flake /home/minksd/nixos test"
+                 alias config-rebuild="sudo nixos-rebuild --flake /home/minksd/nixos/ boot"
                  alias config-update="cd /home/minksd/nixos; sudo nix flake update; cd -"
 
                  ZSH_THEME="amuse"
