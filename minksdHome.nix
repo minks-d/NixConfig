@@ -91,6 +91,14 @@ inputs.nixpkgs.lib.nixosSystem rec {
       #pipewire/wireplumber
       security.rtkit.enable = true;
       services = {
+        #printing and avahi are both to enable network printing
+        printing.enable = true;
+        avahi = {
+          enable = true;
+          nssmdns4 = true;
+          openFirewall = true;
+        };
+        
         mysql = {
           enable = true;
           package = pkgs.mariadb;
