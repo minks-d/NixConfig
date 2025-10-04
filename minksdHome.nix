@@ -164,9 +164,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       i18n.defaultLocale = "en_US.UTF-8";
 
-      fonts.packages = with nixpkgs; [
+      fonts.packages = with nixpkgs;[
         cascadia-code
         ipaexfont
+        nerd-fonts."m+"
       ];
 
       gui.enable = true;
