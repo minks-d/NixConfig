@@ -32,6 +32,7 @@
       group = "minksd";
       extraGroups = [
         "wheel" # Sudo privileges
+        "docker" # Run docker without Sudo
       ];
     };
     users.groups.minksd = {};

@@ -119,6 +119,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       #nvidia/graphics
       services.xserver.videoDrivers = ["nvidia"];
       hardware = {
+        nvidia-container-toolkit.enable = true;
         cpu.intel.updateMicrocode = true;
         nvidia = {
           package = boot.kernelPackages.nvidiaPackages.latest;
@@ -169,7 +170,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         ipaexfont
         nerd-fonts."m+"
       ];
-
+      virtualisation.docker.enable = true;
       gui.enable = true;
 
       desktop.niri.enable = true;
