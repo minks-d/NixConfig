@@ -36,6 +36,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
       networking.hostName = "minksdHome";
       networking.useNetworkd = true;
 
+      virtualisation.docker.enable = true;
+      virtualisation.podman.enable = true;
+
       fileSystems = {
         "/" = {
           device = "/dev/disk/by-label/NIXROOT";

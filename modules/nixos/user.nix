@@ -32,6 +32,7 @@
       group = "minksd";
       extraGroups = [
         "wheel" # Sudo privileges
+        "docker" # Allow access to the docker daemon
       ];
     };
     users.groups.minksd = {};
