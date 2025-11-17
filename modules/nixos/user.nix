@@ -33,6 +33,7 @@
       extraGroups = [
         "wheel" # Sudo privileges
         "docker" # Allow access to the docker daemon
+        "wireshark" #Allow this user to monitor network interfaces
       ];
     };
     users.groups.minksd = {};

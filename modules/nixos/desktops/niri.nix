@@ -20,7 +20,9 @@
       bibata-cursors
       fuzzel
       xwayland-satellite
-      swaylock
+      grim
+      slurp
+      wl-clipboard
     ];
     programs.niri.enable = true;
     programs.niri.package = pkgs.niri-unstable;
@@ -33,17 +35,20 @@
     home-manager.users.${config.user} = {config, ...}: {
       nixpkgs.overlays = [inputs.niri.overlays.niri];
 
-      programs.niri.settings = {
+      programs.niri.settings = with config.lib.niri.actions; let
+        zsh = spawn "zsh" "-c";
+      in {
         binds = {
           "Mod+Q".action.spawn = "foot";
           "Mod+R".action.spawn = "fuzzel";
-          "Mod+Shift+L".action.spawn = "swaylock";
-          "Mod+P".action = config.lib.niri.actions.quit;
-          "Mod+F".action = config.lib.niri.actions.fullscreen-window;
-          "Mod+C".action = config.lib.niri.actions.close-window;
-          "Mod+H".action = config.lib.niri.actions.focus-column-left;
-          "Mod+L".action = config.lib.niri.actions.focus-column-right;
-          "Ctrl+Shift+P".action = config.lib.niri.actions.screenshot;
+          "Mod+P".action = quit;
+          "Mod+F".action = fullscreen-window;
+          "Mod+C".action = close-window;
+          "Mod+H".action = focus-column-left;
+          "Mod+L".action = focus-column-right;
+          "Mod+S".action = zsh ''grim -g "$(slurp)" - | wl-copy'';
+
+#          "Ctrl+Shift+P".action = screenshot;
         };
         spawn-at-startup = [
           {

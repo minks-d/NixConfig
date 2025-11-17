@@ -2,6 +2,7 @@
   globals,
   inputs,
   overlays,
+  imports,
   ...
 }:
 inputs.nixpkgs.lib.nixosSystem rec {
@@ -19,12 +20,14 @@ inputs.nixpkgs.lib.nixosSystem rec {
   modules = with specialArgs.upkgs; [
     inputs.home-manager.nixosModules.home-manager
     inputs.niri.nixosModules.niri
+    inputs.nix-minecraft.nixosModules.minecraft-servers
     ./modules/common
     ./modules/nixos
     rec {
       environment.systemPackages = with pkgs; [
         grayjay
         jetbrains.idea-ultimate
+        jetbrains.rust-rover
         unison
         vial
       ];
@@ -190,6 +193,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       steam.enable = true;
       lutris.enable = true;
       rust.enable = true;
+      minecraft.enable = true;
         }
   ];
 }

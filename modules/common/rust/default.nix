@@ -13,7 +13,7 @@
     environment.systemPackages = with upkgs; [
       rust-analyzer-nightly
 
-      emacsPackages.rust-mode
+      emacs.pkgs.rust-mode
       
     ];
 

@@ -28,6 +28,8 @@
       url = "github:/nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 outputs = {nixpkgs, ...} @ inputs: let
   system = "x86_64-linux";
@@ -35,6 +37,10 @@ outputs = {nixpkgs, ...} @ inputs: let
     inputs.nur.overlays.default
     inputs.niri.overlays.niri
     inputs.fenix.overlays.default
+    inputs.nix-minecraft.overlay
+  ];
+  imports = [
+    inputs.nix-minecraft.nixosModules.minecraft-servers
   ];
   globals = let
     baseName = "minksulivarri.com";
@@ -45,7 +51,7 @@ outputs = {nixpkgs, ...} @ inputs: let
   };
 in rec {
   nixosConfigurations = {
-    minksdHome = import ./minksdHome.nix {inherit inputs globals overlays;};
+    minksdHome = import ./minksdHome.nix {inherit inputs globals overlays imports;};
   };
   homeConfigurations = {
     minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;

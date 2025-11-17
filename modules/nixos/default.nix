@@ -8,5 +8,6 @@
   ./steam.nix
   ./user.nix
   ./desktops
+  ./minecraft.nix
   ];
 }
