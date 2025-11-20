@@ -16,10 +16,13 @@
       emacs.pkgs.nix-mode
       emacs.pkgs.lsp-mode
       emacs.pkgs.flycheck
+      emacs.pkgs.rust-mode
+      
 
     ];
     home-manager.users.${config.user} = {
       home.file.".emacs.d/init.el".source = ./init.el;
+      home.file.".emacs.d/rust.el".source = ./rust.el;
     };
   };
 }
