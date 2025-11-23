@@ -9,18 +9,24 @@
     };
   };
   config = lib.mkIf (config.emacs.enable == true) {
-    environment.systemPackages = with pkgs;[
-      emacs
+    services.emacs = {
+      enable = true;
+      package = let epkgs = pkgs.epkgs; in (
+        (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages (
+          epkgs: builtins.attrValues {
+            inherit (epkgs)
+              nix-mode
+              lsp-mode
+              flycheck
+              rust-mode
+              eglot;
+          }
+        )
+      );
+      startWithGraphical = true;
+      install = true;
+    };
 
-      #Packages to install
-      emacs.pkgs.nix-mode
-      emacs.pkgs.lsp-mode
-      emacs.pkgs.flycheck
-      emacs.pkgs.rust-mode
-      emacs.pkgs.eglot
-      
-
-    ];
     home-manager.users.${config.user} = {
       home.file.".emacs.d/init.el".source = ./init.el;
       home.file.".emacs.d/rust.el".source = ./rust.el;
