@@ -17,22 +17,20 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
     };
   };
-  modules = let pkgs = inputs.upkgs.pkgs; in [
+  modules = with specialArgs.upkgs; [
     inputs.home-manager.nixosModules.home-manager
     inputs.niri.nixosModules.niri
     inputs.nix-minecraft.nixosModules.minecraft-servers
     ./modules/common
     ./modules/nixos
     rec {
-      environment.systemPackages = builtins.attrValues {
-        inherit (pkgs)
-          grayjay
-          unison
-          vial;
-        inherit (pkgs.jetbrains)
-          idea-ultimate
-          rust-rover;
-      };
+      environment.systemPackages = with pkgs; [
+        grayjay
+        jetbrains.idea-ultimate
+        jetbrains.rust-rover
+        unison
+        vial
+      ];
       system.stateVersion = "24.04";
       home-manager.backupFileExtension = "backup";
       nix.settings.experimental-features = "flakes nix-command";
@@ -145,13 +143,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
         portal = {
           xdgOpenUsePortal = true;
           enable = true;
-          extraPortals = builtins.arrtValues {
-            inherit (pkgs)
-              xdg-desktop-portal;
-            inherit (pkgs.kdePackage)
-              xdg-desktop-portal-kde;
-
-          };
+          extraPortals = with nixpkgs; [
+            kdePackages.xdg-desktop-portal-kde
+            xdg-desktop-portal
+          ];
           config = {
             common.default = ["gtk"];
           };
@@ -175,13 +170,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       i18n.defaultLocale = "en_US.UTF-8";
 
-      fonts.packages = builtins.attrValues {
-        inherit (pkgs)
+      fonts.packages = with nixpkgs;[
         cascadia-code
-          ipaexfont;
-        inherit (pkgs.nerdfonts)
-        "m+";
-      };
+        ipaexfont
+        nerd-fonts."m+"
+      ];
 
       gui.enable = true;
 
