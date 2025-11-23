@@ -15,25 +15,44 @@
 
   config = lib.mkIf (config.gui.enable && config.firefox.enable) {
     home-manager.users.${config.user} = {
-      programs.firefox = {
-        enable = true;
-        package =
-          if pkgs.stdenv.isDarwin
-          then pkgs.firefox-bin
-          else pkgs.firefox;
-        profiles.default = {
-          id = 0;
-          name = "default";
-          isDefault = true;
-          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-            sidebery
-          ];
-          settings = {
+      programs.firefox =
+        let
+          genericSettings = {
             "app.update.auto" = false;
             "browser.aboutConfig.showWarning" = false;
             "media.ffmpeg.vaapi.enabled" = true;
             "svg.context-properties.content.enabled" = true;
+            };
+        in {
+        enable = true;
+        package = pkgs.firefox;
+
+        profiles.default = {
+          id = 0;
+          name = "default";
+          isDefault = true;
+          extensions.packages = builtins.attrValues {
+            inherit (pkgs.nur.repos.rycee.firefox-addons)
+              sidebery;
           };
+          settings = genericSettings ++ {
+          };
+        };
+        profiles."i2p" = {
+          id = 1;
+          name = "i2p";
+          isDefault = false;
+          settings = genericSettings ++ {
+            "network.proxy.type" = 1;
+            "network.proxy.http" = "127.0.0.1";
+            "network.proxy.http_port" = 4444;
+            "network.proxy.ssl" = "127.0.0.1";
+            "network.proxy.ssl_port" = 4444;
+            "network.proxy.no_proxies_on" = "127.0.0.1, localhost";
+            "media.peerconnection.ice.proxy_only" = true;
+            "keyword.enabled" = false;
+          };
+        };
         };
       };
       xdg.mimeApps = {
@@ -48,5 +67,4 @@
         };
       };
     };
-  };
 }
