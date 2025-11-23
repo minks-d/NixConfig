@@ -14,6 +14,8 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.firefox.enable) {
+    services.i2p.enable = true;
+    
     home-manager.users.${config.user} = {
       programs.firefox =
         let
@@ -44,11 +46,11 @@
           isDefault = false;
           settings = {
             "network.proxy.type" = 1;
-            "network.proxy.http" = "127.0.0.1";
+            "network.proxy.http" = "[::ffff:127.0.0.1]";
             "network.proxy.http_port" = 4444;
-            "network.proxy.ssl" = "127.0.0.1";
+            "network.proxy.ssl" = "[::ffff:127.0.0.1]";
             "network.proxy.ssl_port" = 4444;
-            "network.proxy.no_proxies_on" = "127.0.0.1, localhost";
+            "network.proxy.no_proxies_on" = "[::ffff:127.0.0.1], 127.0.0.1, localhost";
             "media.peerconnection.ice.proxy_only" = true;
             "keyword.enabled" = false;
           } // genericSettings;
