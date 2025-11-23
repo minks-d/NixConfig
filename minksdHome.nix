@@ -24,7 +24,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./modules/common
     ./modules/nixos
     rec {
-      environment.systemPackages = builtins.attrValues {
+      environment = {
+        systemPackages = builtins.attrValues {
         inherit (pkgs)
           grayjay
           unison
@@ -32,6 +33,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
         inherit (pkgs.jetbrains)
           idea-ultimate
           rust-rover;
+        };
+        variables = {
+          EDITOR = "emacs";
+          VISUAL = "emacs";
+        };
       };
       system.stateVersion = "24.04";
       home-manager.backupFileExtension = "backup";
