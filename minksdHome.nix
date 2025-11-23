@@ -21,6 +21,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     inputs.home-manager.nixosModules.home-manager
     inputs.niri.nixosModules.niri
     inputs.nix-minecraft.nixosModules.minecraft-servers
+    inputs.nixos-cosmic.nixosModules.default
     ./modules/common
     ./modules/nixos
     rec {
@@ -192,7 +193,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       gui.enable = true;
 
-      desktop.niri.enable = true;
+      desktop.cosmic.enable = true;
       waybar.enable = true;
       foot.enable = true;
       zsh.enable = true;

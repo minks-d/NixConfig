@@ -30,6 +30,8 @@
     };
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 outputs = {nixpkgs, ...} @ inputs: let
   system = "x86_64-linux";
