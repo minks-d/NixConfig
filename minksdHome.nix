@@ -167,7 +167,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
             address = ["192.168.1.253/24"];
             gateway = ["192.168.1.1"];
             dns = ["1.1.1.1"];
-            linkConfig.RequiredForOnline = "";
+            linkConfig.RequiredForOnline = "carrier";
           };
         };
       };
