@@ -22,7 +22,7 @@
             "browser.aboutConfig.showWarning" = false;
             "media.ffmpeg.vaapi.enabled" = true;
             "svg.context-properties.content.enabled" = true;
-            };
+          };
         in {
         enable = true;
         package = pkgs.firefox;
@@ -35,14 +35,14 @@
             inherit (pkgs.nur.repos.rycee.firefox-addons)
               sidebery;
           };
-          settings = genericSettings ++ {
-          };
+          settings = {
+          } // genericSettings;
         };
         profiles."i2p" = {
           id = 1;
           name = "i2p";
           isDefault = false;
-          settings = genericSettings ++ {
+          settings = {
             "network.proxy.type" = 1;
             "network.proxy.http" = "127.0.0.1";
             "network.proxy.http_port" = 4444;
@@ -51,10 +51,9 @@
             "network.proxy.no_proxies_on" = "127.0.0.1, localhost";
             "media.peerconnection.ice.proxy_only" = true;
             "keyword.enabled" = false;
-          };
+          } // genericSettings;
         };
         };
-      };
       xdg.mimeApps = {
         associations.added = {
           "text/html" = ["firefox.desktop"];
@@ -67,4 +66,5 @@
         };
       };
     };
+  };
 }

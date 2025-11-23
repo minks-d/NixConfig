@@ -17,7 +17,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
     };
   };
-  modules = let pkgs = inputs.upkgs.pkgs; in [
+  modules = let pkgs = specialArgs.upkgs; in [
     inputs.home-manager.nixosModules.home-manager
     inputs.niri.nixosModules.niri
     inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -145,10 +145,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
         portal = {
           xdgOpenUsePortal = true;
           enable = true;
-          extraPortals = builtins.arrtValues {
+          extraPortals = builtins.attrValues {
             inherit (pkgs)
               xdg-desktop-portal;
-            inherit (pkgs.kdePackage)
+            inherit (pkgs.kdePackages)
               xdg-desktop-portal-kde;
 
           };
@@ -179,7 +179,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         inherit (pkgs)
         cascadia-code
           ipaexfont;
-        inherit (pkgs.nerdfonts)
+        inherit (pkgs.nerd-fonts)
         "m+";
       };
 
