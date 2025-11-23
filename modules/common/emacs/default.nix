@@ -12,7 +12,7 @@
     services.emacs = {
       enable = true;
       package = let epkgs = pkgs.epkgs; in (
-        (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages (
+        (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
           epkgs: builtins.attrValues {
             inherit (epkgs)
               nix-mode
