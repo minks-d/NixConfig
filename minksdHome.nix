@@ -159,6 +159,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
       systemd.network = {
         enable = true;
+        wait-online.anyInterface = true;
         networks = {
           "01-enp111s0" = {
             enable = true;
@@ -166,7 +167,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
             address = ["192.168.1.253/24"];
             gateway = ["192.168.1.1"];
             dns = ["1.1.1.1"];
-            linkConfig.RequiredForOnline = "routable";
+            linkConfig.RequiredForOnline = "";
           };
         };
       };
