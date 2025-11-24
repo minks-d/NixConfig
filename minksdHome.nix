@@ -21,7 +21,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
     inputs.home-manager.nixosModules.home-manager
     inputs.niri.nixosModules.niri
     inputs.nix-minecraft.nixosModules.minecraft-servers
-    inputs.nixos-cosmic.nixosModules.default
     ./modules/common
     ./modules/nixos
     rec {
