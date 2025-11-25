@@ -29,8 +29,8 @@ inputs.nixpkgs.lib.nixosSystem {
 	      nix.settings.experimental-features = "flakes nix-command";
 	
         networking.hostName = "minksdWSL";
-        networking.useNetworkd = true;
-
+        
+        git.enable = true;
         zsh.enable = true;
         emacs.enable = true;
         elixir.enable = true;
