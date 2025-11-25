@@ -23,7 +23,7 @@
           }
         )
       );
-      startWithGraphical = true;
+      startWithGraphical = false;
       install = true;
     };
 
