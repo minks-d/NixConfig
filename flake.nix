@@ -30,34 +30,52 @@
     };
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-outputs = {nixpkgs, ...} @ inputs: let
-  system = "x86_64-linux";
-  overlays = [
-    inputs.nur.overlays.default
-    inputs.niri.overlays.niri
-    inputs.fenix.overlays.default
-    inputs.nix-minecraft.overlay
-  ];
-  imports = [
-    inputs.nix-minecraft.nixosModules.minecraft-servers
-  ];
-  globals = let
-    baseName = "minksulivarri.com";
-  in rec {
-    user = "minksd";
-    fullName = "Daniel Minks";
-    gitName = fullName;
-  };
-in rec {
-  nixosConfigurations = {
-    minksdHome = import ./minksdHome.nix {inherit inputs globals overlays imports;};
-  };
-  homeConfigurations = {
-    minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
-  };
-  packages = {
-    minksdHome = system: import ./minksdHome.nix {inherit inputs globals overlays;};
-  };
-};
+  outputs = inputs:
+    let
+      inherit (inputs)
+        nur
+        niri
+        fenix
+        nix-minecraft
+        home-manager
+        rust-overlay;
+      
+      system = "x86_64-linux";
+      overlays = [
+        nur.overlays.default
+        niri.overlays.niri
+        fenix.overlays.default
+        nix-minecraft.overlay
+        rust-overlay.overlays.default
+      ];
+      imports = [
+        nix-minecraft.nixosModules.minecraft-servers
+        home-manager.nixosModules.home-manager
+        niri.nixosModules.niri
+        nix-minecraft.nixosModules.minecraft-servers
+      ];
+      globals = let
+        baseName = "minksulivarri.com";
+      in rec {
+        user = "minksd";
+        fullName = "Daniel Minks";
+        gitName = fullName;
+      };
+    in rec {
+      nixosConfigurations = {
+        minksdHome = import ./minksdHome {inherit system inputs globals overlays imports;};
+      };
+      homeConfigurations = {
+        minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
+      };
+      packages = {
+        minksdHome = system: import ./minksdHome {inherit system inputs globals overlays;};
+      };
+    };
 }
