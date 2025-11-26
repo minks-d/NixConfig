@@ -39,7 +39,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       #nvidia/graphics
       hardware = {
         nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.latest; # or vulkan_beta
+          package = boot.kernelPackages.nvidiaPackages.vulkan_beta; # or vulkan_beta
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
