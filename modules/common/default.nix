@@ -21,6 +21,7 @@
   ./emacs
   ./rust
   ./direnv.nix
+  ./nh.nix
   ];
   options = {
     user = lib.mkOption {
