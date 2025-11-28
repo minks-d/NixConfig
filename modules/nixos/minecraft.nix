@@ -29,15 +29,6 @@
         loaderVersion = "0.18.0";
       }; # Specific fabric loader version
 
-      files = {
-        "config/Geyser-Fabric/config.yml".value = {
-          bedrock = {
-            address = "192.168.1.253";
-          };
-          port = 19131;
-        };
-      };
-      
       symlinks = {
         mods = pkgs.linkFarmFromDrvs "mods" (
           builtins.attrValues {
@@ -49,12 +40,18 @@
                url = "https://cdn.modrinth.com/data/EsAfCjCV/versions/8sbiz1lS/appleskin-fabric-mc1.21.9-3.0.7.jar";
                sha256 = "sha256-ejEbFTr0wrdgm4SSpjsk3Zt6/TOLrBoj32qJGm6AC4k=";
             };
-#            Inventory-Essentials = pkgs.fetchurl {
-#              url = "https://cdn.modrinth.com/data/Boon8xwi/versions/uHseJiGy/inventoryessentials-fabric-1.21.10-21.10.3.jar";
-#              sha256 = "sha256-ShKTqsda8ZaCeoxFtXqzTeeDejll9oin16E+VcJPA58=";
-#            };
+            Geyser-MC = pkgs.fetchurl {
+              url = "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/fabric";
+              sha256 = "sha256-Ut1H+NI34jNjkCWS7LPgPVK1gv/WO9dWgP7kthkWVN0=";
+            };
           }
         );
+        "config/Geyser-Fabric/config.yml".value = {
+          bedrock = {
+            address = "0.0.0.0";
+            port = 19132;
+          };
+        };
       };
     };
   };
