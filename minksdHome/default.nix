@@ -142,10 +142,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
           };
         };
       };
-
       systemd.network = {
         enable = true;
         wait-online.anyInterface = true;
+        nameservers = ["127.0.0.1" "::1"];
         networks = {
           "01-enp111s0" = {
             enable = true;
