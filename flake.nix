@@ -35,6 +35,11 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    oisd = {
+      url = "https://big.oisd.nl/domainswild";
+      flake = false;
+    };
   };
   outputs = inputs:
     let

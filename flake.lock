@@ -246,6 +246,18 @@
         "type": "github"
       }
     },
+    "oisd": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-b+5/2k1UCcxdSZbCrgIowdYa1JM7kAsJuXN8kADI8DU=",
+        "type": "file",
+        "url": "https://big.oisd.nl/domainswild"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://big.oisd.nl/domainswild"
+      }
+    },
     "root": {
       "inputs": {
         "fenix": "fenix",
@@ -255,6 +267,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
+        "oisd": "oisd",
         "rust-overlay": "rust-overlay"
       }
     },
