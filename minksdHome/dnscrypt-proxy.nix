@@ -20,9 +20,11 @@ in
   networking.networkmanager.dns = "none";
 
   services.resolved.enable = lib.mkForce false;
-  
+
+  systemd.services.dnscrypt-proxy.wantedBy = ["network-online.target"]; # So that other services that need network can get dns
   services.dnscrypt-proxy = {
     enable = true;
+
     # See https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
     settings = {
       sources.public-resolvers = {
