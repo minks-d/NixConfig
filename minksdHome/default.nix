@@ -168,6 +168,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       gui.enable = true;
 
+      nh.enable = true;
+      direnv.enable = true;
       desktop.niri.enable = true;
       waybar.enable = true;
       foot.enable = true;
