@@ -20,6 +20,7 @@
   ./zsh
   ./emacs
   ./rust
+  ./direnv.nix
   ];
   options = {
     user = lib.mkOption {
