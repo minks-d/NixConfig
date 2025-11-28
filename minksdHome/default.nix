@@ -70,6 +70,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
         };
       };
 
+      time.timeZone = "America/New_York";
+      i18n.defaultLocale = "en_US.UTF-8";
+
       environment = {
         systemPackages = builtins.attrValues {
           inherit (pkgs)
@@ -90,9 +93,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       system.stateVersion = "24.04";
       home-manager.backupFileExtension = "backup";
       nix.settings.experimental-features = "flakes nix-command";
-
-      networking.hostName = "minksdHome";
-      networking.useNetworkd = true;
 
       hardware.cpu.intel.updateMicrocode = true;
 
@@ -142,17 +142,16 @@ inputs.nixpkgs.lib.nixosSystem rec {
           };
         };
       };
-      systemd.network = {
-        enable = true;
-        wait-online.anyInterface = true;
-        nameservers = ["127.0.0.1" "::1"];
-        networks = {
-          "01-enp111s0" = {
-            enable = true;
-            matchConfig.Name = "enp111s0";
-            linkConfig.RequiredForOnline = "carrier";
-          };
-        };
+
+      networking = {
+        hostName = "minksdHome";
+        enableIPv6 = true;
+        useDHCP = true;
+        dhcpcd.persistent = true;
+        timeServers = [
+          "time.nist.gov"
+        ];
+        
       };
 
       fonts.packages = builtins.attrValues {
