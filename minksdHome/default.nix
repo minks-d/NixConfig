@@ -78,7 +78,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       environment = {
         systemPackages = builtins.attrValues {
           inherit (pkgs)
-            grayjay
             unison
             vial
             ;
