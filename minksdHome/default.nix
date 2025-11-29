@@ -168,6 +168,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       gui.enable = true;
 
+      tuned = {
+        enable = true;
+        profile = ''desktop'';
+      };
       nh.enable = true;
       direnv.enable = true;
       desktop.niri.enable = true;
