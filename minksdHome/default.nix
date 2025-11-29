@@ -176,12 +176,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
       emacs.enable = true;
       firefox.enable = true;
       discord.enable = true;
-      elixir.enable = true;
       flatpak.enable = true;
       teams.enable = true;
       steam.enable = true;
       lutris.enable = true;
-      rust.enable = true;
       minecraft.enable = true;
     }
   ];
