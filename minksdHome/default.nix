@@ -170,7 +170,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       nh.enable = true;
       direnv.enable = true;
       desktop.niri.enable = true;
-      waybar.enable = true;
+      noctalia.enable = true;
       foot.enable = true;
       zsh.enable = true;
       emacs.enable = true;

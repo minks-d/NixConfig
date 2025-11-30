@@ -29,7 +29,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -39,6 +42,15 @@
     oisd = {
       url = "https://big.oisd.nl/domainswild";
       flake = false;
+    };
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";  # Use same quickshell version
     };
   };
   outputs = inputs:
@@ -77,7 +89,7 @@
         minksdHome = import ./minksdHome {inherit system inputs globals overlays imports;};
       };
       homeConfigurations = {
-        minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
+        minksd = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
       };
       packages = {
         minksdHome = system: import ./minksdHome {inherit system inputs globals overlays;};
