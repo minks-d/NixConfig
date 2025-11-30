@@ -22,6 +22,7 @@
   ./rust
   ./direnv.nix
   ./nh.nix
+  ./wezterm
   ];
   options = {
     user = lib.mkOption {

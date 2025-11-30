@@ -171,6 +171,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       direnv.enable = true;
       desktop.niri.enable = true;
       noctalia.enable = true;
+      wezterm.enable = true;
       foot.enable = true;
       zsh.enable = true;
       emacs.enable = true;
