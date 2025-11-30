@@ -39,7 +39,7 @@
         zsh = spawn "zsh" "-c";
       in {
         binds = {
-          "Mod+Q".action.spawn = "wezterm";
+          "Mod+Q".action.spawn = "foot";
           "Mod+R".action.spawn = "fuzzel";
           "Mod+P".action = quit;
           "Mod+F".action = fullscreen-window;
