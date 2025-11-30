@@ -85,10 +85,34 @@
             };
           };
         };
+        window-rules = [
+          {
+            geometry-corner-radius =
+              let
+                r = 8.0;
+              in
+                {
+                  top-left = r;
+                  top-right = r;
+                  bottom-left = r;
+                  bottom-right = r;
+                };
+          }
+        ];
+        debug = {
+          honor-xdg-activation-with-invalid-serial = [];
+        };
         cursor.size = 22;
         cursor.theme = "Bibata-Modern-Classic";
         layout.border.active = 0;
         layout.border.inactive = 2;
+        layout.gaps = 8;
+        layout.struts = {
+          top = 8;
+          bottom = 8;
+          left = 2;
+          right = 2;
+        };
         layout.center-focused-column = "never";
         layout.default-column-width.proportion = 0.75;
         input.focus-follows-mouse.enable = true;
