@@ -35,6 +35,7 @@ inputs.nixpkgs.lib.nixosSystem {
         emacs.enable = true;
         elixir.enable = true;
         rust.enable = true;
+        nh.enable = true;
       }
       ];
         
