@@ -15,8 +15,8 @@ inputs.nixpkgs.lib.nixosSystem {
 
     modules = let system = "x86_64-linux"; in imports ++ [
      inputs.home-manager.nixosModules.home-manager
-    ./modules/common
-    ./modules/nixos
+     ../modules/common
+     ../modules/nixos
       inputs.nixos-wsl.nixosModules.default
       {
         wsl = {

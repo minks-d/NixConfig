@@ -9,5 +9,6 @@
   ./user.nix
   ./desktops
   ./minecraft.nix
+  ./noctalia
   ];
 }

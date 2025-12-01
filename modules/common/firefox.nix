@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  upkgs,
   ...
 }: {
   options = {
@@ -27,14 +28,14 @@
           };
         in {
         enable = true;
-        package = pkgs.firefox;
+        package = upkgs.firefox;
 
         profiles.default = {
           id = 0;
           name = "default";
           isDefault = true;
           extensions.packages = builtins.attrValues {
-            inherit (pkgs.nur.repos.rycee.firefox-addons)
+            inherit (upkgs.nur.repos.rycee.firefox-addons)
               sidebery;
           };
           settings = {
