@@ -177,6 +177,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       noctalia.enable = true;
       foot.enable = true;
       zsh.enable = true;
+      git.enable = true;
       emacs.enable = true;
       firefox.enable = true;
       discord.enable = true;
