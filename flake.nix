@@ -75,9 +75,7 @@
         niri.nixosModules.niri
         nix-minecraft.nixosModules.minecraft-servers
       ];
-      globals = let
-        baseName = "minksulivarri.com";
-      in rec {
+      globals = rec {
         user = "minksd";
         fullName = "Daniel Minks";
         gitName = fullName;
