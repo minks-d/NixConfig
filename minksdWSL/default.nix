@@ -33,8 +33,6 @@ inputs.nixpkgs.lib.nixosSystem {
         git.enable = true;
         zsh.enable = true;
         emacs.enable = true;
-        elixir.enable = true;
-        rust.enable = true;
         nh.enable = true;
       }
       ];
