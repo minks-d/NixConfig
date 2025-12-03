@@ -101,8 +101,8 @@ in
           # Allow dnscrypt-proxy to talk to upstream servers
           # Replace <DNSCRYPT-UID> with:
           # ps -o uid,user,pid,cmd -C dnscrypt-proxy
-          meta skuid 62582 udp dport { 443, 853 } accept
-          meta skuid 62582 tcp dport { 443, 853 } accept
+          meta skuid 62582 udp dport { 53, 443, 853 } accept
+          meta skuid 62582 tcp dport { 53, 443, 853 } accept
 
           # Block all other outbound DNS
           udp dport { 53, 853 } drop
