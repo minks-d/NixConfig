@@ -16,8 +16,10 @@
 	};
 
 	config = lib.mkIf (config.gui.enable && config.teams.enable) {
-
-    environment.systemPackages = [ pkgs.teams-for-linux ];
-	};
+    environment.systemPackages = builtins.attrValues {
+      inherit (pkgs)
+        teams-for-linux;
+    };
+  };
 }
  
