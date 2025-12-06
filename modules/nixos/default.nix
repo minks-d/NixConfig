@@ -10,6 +10,6 @@
   ./desktops
   ./minecraft.nix
   ./noctalia
-  ./tuned.nix
+  ./tuned
   ];
 }
