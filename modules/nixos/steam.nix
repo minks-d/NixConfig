@@ -10,9 +10,6 @@
     hardware.steam-hardware.enable = true;
     unfreePackages = [
       "steam"
-      "steam-original"
-      "steamcmd"
-      "steam-run"
     ];
 
     programs.steam = {
@@ -23,13 +20,5 @@
     };
     programs.gamescope.capSysNice = true;
 
-    environment.systemPackages = with pkgs; [
-      # Enable terminal interaction
-      steamcmd
-      steam-tui
-
-      # Overlay with performance monitoring
-      mangohud
-    ];
   };
 }
