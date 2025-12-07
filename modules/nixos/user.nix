@@ -2,6 +2,8 @@
   config,
   pkgs,
   lib,
+  globals,
+  inputs,
   ...
 }:
 {
@@ -27,8 +29,10 @@
       # Create a home directory for human user
       isNormalUser = true;
 
+      uid = 3000;
+
       # Automatically create a password to start
-      hashedPassword = config.passwordHash;
+      hashedPasswordFile = config.age.secrets.minksdPass.path;
       group = "minksd";
       extraGroups = [
         "wheel" # Sudo privileges
@@ -38,26 +42,31 @@
     };
     users.groups.minksd = {};
 
-    home-manager.users.minksd.xdg = {
+    home-manager.users."${config.user}" = {
 
-      # Allow Nix to manage the default applications list
-      mimeApps.enable = true;
+      imports = [
+        inputs.agenix.homeManagerModules.default
+      ];
+
+      age.secrets.minksdU2F.file = "${globals.secretsDir}/minksdU2F.age";
+      age.secrets.minksdU2F.path = "/home/minksd/.config/Yubico/u2f_keys";
+      
+      xdg = {
 
 
-      # Set directories for application defaults
-      userDirs = {
-        enable = true;
-        createDirectories = true;
-        documents = "$HOME/documents";
-        download = config.userDirs.download;
-        music = "$HOME/media/music";
-        pictures = "$HOME/media/images";
-        videos = "$HOME/media/videos";
-        desktop = "$HOME/other/desktop";
-        publicShare = "$HOME/other/public";
-        templates = "$HOME/other/templates";
-        extraConfig = {
-          XDG_DEV_DIR = "$HOME/dev";
+        # Allow Nix to manage the default applications list
+        mimeApps.enable = true;
+
+
+        # Set directories for application defaults
+        userDirs = {
+          enable = true;
+          createDirectories = true;
+          documents = "$HOME/documents";
+          download = config.userDirs.download;
+          extraConfig = {
+            XDG_DEV_DIR = "$HOME/dev";
+          };
         };
       };
     };

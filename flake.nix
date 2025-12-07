@@ -50,17 +50,18 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "";
+    };
   };
-  outputs = inputs:
+  outputs = {self, nur, niri, fenix, nix-minecraft, home-manager, rust-overlay, sops-nix, agenix, ...} @ inputs:
     let
-      inherit (inputs)
-        nur
-        niri
-        fenix
-        nix-minecraft
-        home-manager
-        rust-overlay;
-      
       system = "x86_64-linux";
       overlays = [
         nur.overlays.default
@@ -74,10 +75,13 @@
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         nix-minecraft.nixosModules.minecraft-servers
+        sops-nix.nixosModules.sops
+        agenix.nixosModules.default
       ];
       globals = let
         baseName = "minksulivarri.com";
       in rec {
+        secretsDir = ./modules/common/secrets;
         user = "minksd";
         fullName = "Daniel Minks";
         gitName = fullName;
