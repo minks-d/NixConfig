@@ -11,5 +11,6 @@
   ./minecraft.nix
   ./noctalia
   ./tuned
+  ./hyprlock
   ];
 }

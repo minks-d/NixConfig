@@ -7,7 +7,7 @@
       inherit (pkgs)
         pavucontrol;
     };
-    
+
     home-manager.users.${config.user} = {config, ...}: {
       imports = [
         inputs.noctalia.homeModules.default

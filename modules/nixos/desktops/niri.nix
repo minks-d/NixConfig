@@ -24,6 +24,8 @@
       slurp
       wl-clipboard
     ];
+
+    hyprlock.enable = true;
     programs.niri.enable = true;
     programs.niri.package = pkgs.niri-unstable;
 
@@ -47,6 +49,7 @@
           "Mod+H".action = focus-column-left;
           "Mod+L".action = focus-column-right;
           "Mod+S".action = zsh ''grim -g "$(slurp)" - | wl-copy'';
+          "Ctrl+Shift+L".action = zsh ''hyprlock'';
 
 #          "Ctrl+Shift+P".action = screenshot;
         };
