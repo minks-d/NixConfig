@@ -3,6 +3,10 @@
   options.noctalia.enable = lib.mkEnableOption { default = false;};
   
   config = lib.mkIf (config.noctalia.enable){
+    environment.systemPackages = builtins.attrValues {
+      inherit (pkgs)
+        pavucontrol;
+    };
     
     home-manager.users.${config.user} = {config, ...}: {
       imports = [
