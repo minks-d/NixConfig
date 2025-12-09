@@ -10,8 +10,8 @@
     ./user.nix
     ./desktops
     ./minecraft.nix
+    ./tuned.nix
     ./noctalia
-    ./tuned
     ./hyprlock
   ];
 
