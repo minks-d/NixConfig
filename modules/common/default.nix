@@ -23,6 +23,7 @@
   ./git.nix
   ./direnv.nix
   ./nh.nix
+  ./time.nix
   ./wezterm
   ];
   options = {

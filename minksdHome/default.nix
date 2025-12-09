@@ -72,7 +72,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
         };
       };
 
-      time.timeZone = "America/New_York";
       i18n.defaultLocale = "en_US.UTF-8";
 
       environment = {
@@ -149,9 +148,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
         enableIPv6 = true;
         useDHCP = true;
         dhcpcd.persistent = true;
-        timeServers = [
-          "time.nist.gov"
-        ];
         
       };
 
