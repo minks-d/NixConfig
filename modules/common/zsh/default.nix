@@ -36,6 +36,8 @@
                  alias config-update="cd /home/minksd/nixos; sudo nix flake update; cd -"
                  alias emacs="emacsclient"
 
+                 alias sudo="run0" #Sudo is disabled on this system, use run0 instead
+
                  ZSH_THEME="amuse"
         '';
       };

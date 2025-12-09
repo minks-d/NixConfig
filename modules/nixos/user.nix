@@ -8,20 +8,10 @@
 }:
 {
 
-  options = {
-
-    passwordHash = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Password created with mkpasswd -m sha-512";
-      default = null;
-      # Test it by running: mkpasswd -m sha-512 --salt "PZYiMGmJIIHAepTM"
-    };
-  };
-
   config = {
 
     # Allows us to declaritively set password if false
-    users.mutableUsers = true;
+    users.mutableUsers = false;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.minksd = {
@@ -31,7 +21,6 @@
 
       uid = 3000;
 
-      # Automatically create a password to start
       hashedPasswordFile = config.age.secrets.minksdPass.path;
       group = "minksd";
       extraGroups = [
