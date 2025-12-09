@@ -277,6 +277,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-local": {
+      "locked": {
+        "lastModified": 1765136046,
+        "narHash": "sha256-SYmD5XH5iJc7FEjUoCw6kFiaZdubR7Qlr59xEIPsQXk=",
+        "ref": "refs/heads/master",
+        "rev": "e024d9c6c796a453930e7ac945a9c31e6a6eb06c",
+        "revCount": 908487,
+        "type": "git",
+        "url": "file:///home/minksd/nixpkgs"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/minksd/nixpkgs"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1764950072,
@@ -337,7 +352,7 @@
     "oisd": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-elp3tHODeHmjHQ64Lp60cZSXXVDiIfTiTf9rXlR72UY=",
+        "narHash": "sha256-ciyicjqxjEvUJGMW59hVWdfRrhKHc4RWbEWL5r16SRY=",
         "type": "file",
         "url": "https://big.oisd.nl/domainswild"
       },
@@ -355,6 +370,7 @@
         "nix-minecraft": "nix-minecraft",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-local": "nixpkgs-local",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
         "nur": "nur",
