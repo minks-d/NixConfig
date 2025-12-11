@@ -25,6 +25,8 @@
             "browser.aboutConfig.showWarning" = false;
             "media.ffmpeg.vaapi.enabled" = true;
             "svg.context-properties.content.enabled" = true;
+            "fission.autostart" = true;
+            "gfx.webrender.all" = true;
           };
         in {
         enable = true;
