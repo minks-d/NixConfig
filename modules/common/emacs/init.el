@@ -33,14 +33,24 @@
 (add-to-list 'eglot-server-programs `(elixir-mode (concat (getenv "ELIXIR_LS_PATH") "/release/language_server.sh")))
 
 ;;Enable lsp-mode globally, installed in ./default.nix
-	     (use-package lsp-mode
-	       :commands lsp
-	       :diminish lsp-mode
-	       :hook
-	       (elixir-mode . lsp)
-	       :init
-	       (add-to-list 'exec-path (concat (getenv "ELIXIR_LS_PATH") "/release"))
-	      )
+(use-package lsp-mode
+  :commands lsp
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (add-to-list 'exec-path (concat (getenv "ELIXIR_LS_PATH") "/release"))
+  )
+
+;;helm-projectile
+(use-package projectile
+  :init (setq projectile-project-search-path '("~/projects/" "~/nixos" "~/nixpkgs")))
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)
+
+(use-package helm-projectile)
+(helm-projectile-on)
+
 
 ;;Rust Configuration
 (load "~/.emacs.d/rust.el")

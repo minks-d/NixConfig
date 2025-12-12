@@ -15,11 +15,13 @@
         (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
           epkgs: builtins.attrValues {
             inherit (epkgs)
+              projectile
+              helm-projectile
+              flycheck
+              eglot
               nix-mode
               lsp-mode
-              flycheck
-              rust-mode
-              eglot;
+              rust-mode;
           }
         )
       );
