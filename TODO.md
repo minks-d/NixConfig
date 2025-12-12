@@ -9,3 +9,6 @@
   sbomnix /run/current-system --csv /dev/null --spdx /dev/null --cdx sbom.cdx.json;
   grype sbom.cdx.json
 ' <- Automate this as well, or similar
+- Startpage search
+- Maybe OpenSnitch?
+
