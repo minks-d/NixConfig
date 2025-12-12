@@ -19,8 +19,6 @@
       # Create a home directory for human user
       isNormalUser = true;
 
-      uid = 3000;
-
       hashedPasswordFile = config.age.secrets.minksdPass.path;
       group = "minksd";
       extraGroups = [

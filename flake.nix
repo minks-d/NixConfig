@@ -61,7 +61,7 @@
       inputs.darwin.follows = "";
     };
   };
-  outputs = {self, nur, niri, fenix, nix-minecraft, home-manager, rust-overlay, sops-nix, agenix, ...} @ inputs:
+  outputs = {self, nixpkgs, nixpkgs-unstable, nur, niri, fenix, nix-minecraft, home-manager, rust-overlay, sops-nix, agenix, ...} @ inputs:
     let
       system = "x86_64-linux";
       overlays = [

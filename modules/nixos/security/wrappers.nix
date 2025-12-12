@@ -20,6 +20,7 @@
       chsh = "${lib.getBin pkgs.util-linux}/bin/chsh";
       sudo = "${lib.getBin pkgs.sudo}/bin/sudo";
       sudoedit = "${lib.getBin pkgs.sudo}/bin/sudoedit";
+      pkexec = "${lib.getBin pkgs.polkit}/bin/pkexec";
     };
     cfg = config.security.wrappers;
     in {

@@ -10,7 +10,8 @@ inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
 
     specialArgs = {
-    upkgs = import inputs.nixpkgs {inherit overlays; system = "x86_64-linux";};
+      inherit inputs globals;
+      upkgs = import inputs.nixpkgs {inherit overlays; system = "x86_64-linux";};
     };
 
     modules = let system = "x86_64-linux"; in imports ++ [
