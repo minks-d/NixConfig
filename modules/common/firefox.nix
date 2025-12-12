@@ -15,7 +15,10 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.firefox.enable) {
-    services.i2p.enable = true;
+    services.i2pd = {
+      enable = true;
+      
+    };
     
     home-manager.users.${config.user} = {
       programs.firefox =
