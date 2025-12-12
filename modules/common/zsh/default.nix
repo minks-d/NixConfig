@@ -18,10 +18,15 @@
     programs.zsh.enable = true;
     home-manager.users.${config.user} = {
       programs = {
-        zsh.enable = true;
-        zsh.oh-my-zsh.enable = true;
-        zsh.oh-my-zsh.custom = "/home/${config.user}/.zshrc";
-        zsh.oh-my-zsh.extraConfig = ''
+        fzf = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+        zsh = {
+          enable = true;
+          oh-my-zsh.enable = true;
+          oh-my-zsh.custom = "/home/${config.user}/.zshrc";
+          oh-my-zsh.extraConfig = ''
 
                  export ZSH="${pkgs.oh-my-zsh}/share/oh-my-zsh"
 
@@ -40,6 +45,7 @@
 
                  ZSH_THEME="amuse"
         '';
+        };
       };
     };
     users.defaultUserShell = pkgs.zsh;
