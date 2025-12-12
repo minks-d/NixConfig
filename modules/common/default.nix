@@ -25,6 +25,7 @@
   ./nh.nix
   ./time.nix
   ./wezterm
+  ./i2p.nix
   ];
   options = {
     user = lib.mkOption {
