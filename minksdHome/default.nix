@@ -16,16 +16,9 @@ let
 in
 inputs.nixpkgs.lib.nixosSystem rec {
   inherit system;
-  specialArgs = {
-    inherit globals inputs;
-    upkgs = import inputs.nixpkgs-unstable {
-      inherit system overlays;
-      config = {
-        allowUnfree = true;
-      };
-    };
-  };
 
+  specialArgs = {};
+  
   modules = imports ++ [
     ../modules/common
     ../modules/nixos
@@ -34,14 +27,26 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./dnscrypt-proxy.nix
     ./firewall.nix
 
+    ({config, ...}:{
+      config._module.args = {
+        inherit globals inputs;
+        upkgs = import inputs.nixpkgs-unstable {
+          inherit system overlays;
+          config = {
+            allowUnfree = true;
+          };
+        };
+      };
+    })
+
     #Linux Kernel and nvidia drivers
-    rec {
-      boot.kernelPackages = specialArgs.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
+    ({config, ...}:{
+      boot.kernelPackages = config._module.args.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
 
       #nvidia/graphics
       hardware = {
         nvidia = {
-          package = boot.kernelPackages.nvidiaPackages.vulkan_beta; # or vulkan_beta
+          package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta; # or vulkan_beta
           modesetting.enable = true;
           powerManagement.enable = true;
           powerManagement.finegrained = false;
@@ -59,8 +64,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
         "nvidia_uvm"
         "nvidia_drm"
       ];
-            
-    }
+      
+    })
 
     #Other config
     {
