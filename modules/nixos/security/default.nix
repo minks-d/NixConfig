@@ -65,6 +65,13 @@
     # Prefer manual upgrades on a hardened system
     system.autoUpgrade.enable = false;
 
+
+    boot.kernel.sysctl = {
+      
+      #IPv6 privacy extensions
+      "net.ipv6.conf.all.use_tempaddr" = lib.mkForce 2;
+      "net.ipv6.conf.default.use_tempaddr" = lib.mkForce 2;
+    };
   };
 
 }
