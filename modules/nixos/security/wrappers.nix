@@ -3,7 +3,6 @@
   config = let
     noSuidWrappers = {
       su = {};
-      sudo = {};
       sudoedit = {};
       sg = {};
       mount = {};
@@ -24,10 +23,10 @@
     };
     cfg = config.security.wrappers;
     in {
-      security.wrappers = lib.mapAttrs ( name: _:
+      security.wrappers = lib.mapAttrs ( name: value:
         {
           setuid = lib.mkForce false;
-          source = if ("cfg.${name}" ? source) then lib.mkDefault cfg."${name}".source else lib.mkDefault exceptions."${name}";
+          source = if (value ? source) then lib.mkDefault value.source else lib.mkDefault exceptions."${name}";
           owner = lib.mkDefault "root";
           group = lib.mkDefault "root";
         }
