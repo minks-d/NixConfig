@@ -3,6 +3,7 @@
     ./age.nix
     ./wrappers.nix
     ./modprobe.nix
+    ./polkit.nix
   ];
 
   config = {
@@ -17,16 +18,6 @@
           unixAuth = lib.mkForce true;
         };
       };
-      polkit.extraConfig = ''
-        polkit.addRule(function(action, subject) {
-          if (subject.user == "minksd") {
-            if (action.id.indexOf("org.nixos") == 0) {
-              polkit.log("Caching admin authentication for single NixOS operation");
-              return polkit.Result.AUTH_ADMIN_KEEP;
-            }
-          }
-        });
-      '';
 
       #Sets the kernel's resource limit (ulimit -c 0)
       pam.loginLimits = [
@@ -38,7 +29,8 @@
         }
       ];
     };
-    #Currently bugged such that declarative users cant have their passwords loaded at runtime
+
+    #agenix is currently bugged such that declarative users cant have their passwords loaded at runtime when using userborn
     #services.userborn.enable = true;
 
     #https://saylesss88.github.io/nix/hardening_NixOS.html#hardening-systemd
