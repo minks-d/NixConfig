@@ -28,10 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-    fenix = {
-      url = "github:/nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +35,11 @@
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    fenix = {
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -80,8 +81,8 @@
       overlays = [
         nur.overlays.default
         niri.overlays.niri
-        fenix.overlays.default
         rust-overlay.overlays.default
+        fenix.overlays.default
         nix-minecraft.overlay
       ];
       imports = [

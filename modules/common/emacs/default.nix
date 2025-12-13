@@ -14,6 +14,9 @@
     };
   };
   config = lib.mkIf (config.emacs.enable == true) {
+    environment.systemPackages = [
+      pkgs.rust-analyzer
+    ];
     services.emacs = {
       enable = true;
       package =
@@ -28,9 +31,11 @@
               helm-projectile
               flycheck
               eglot
+              company
               nix-mode
               lsp-mode
               rust-mode
+              elixir-mode
               ;
           }
         ));

@@ -159,6 +159,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
         enableIPv6 = true;
         useDHCP = true;
         dhcpcd.persistent = true;
+        dhcpcd.extraConfig = ''
+        noarp
+        nodelay
+        '';
 
       };
 

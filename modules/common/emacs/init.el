@@ -27,21 +27,6 @@
 
 ;;------Programming------
 
-;;Eglot + Configuration
-(use-package eglot)
-(add-hook 'elixir-mode-hook 'eglot-ensure)
-(add-to-list 'eglot-server-programs `(elixir-mode (concat (getenv "ELIXIR_LS_PATH") "/release/language_server.sh")))
-
-;;Enable lsp-mode globally, installed in ./default.nix
-(use-package lsp-mode
-  :commands lsp
-  :diminish lsp-mode
-  :hook
-  (elixir-mode . lsp)
-  :init
-  (add-to-list 'exec-path (concat (getenv "ELIXIR_LS_PATH") "/release"))
-  )
-
 ;;helm-projectile
 (use-package projectile
   :init (setq projectile-project-search-path '("~/projects/" "~/nixos" "~/nixpkgs")))
@@ -50,6 +35,10 @@
 
 (use-package helm-projectile)
 (helm-projectile-on)
+
+;;company-mode
+(use-package company)
+(add-hook 'after-init-hook 'global-company-mode)
 
 
 ;;Rust Configuration
