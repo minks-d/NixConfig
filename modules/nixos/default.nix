@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./security
     ./flatpak.nix

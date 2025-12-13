@@ -60,7 +60,21 @@
       inputs.darwin.follows = "";
     };
   };
-  outputs = {self, nixpkgs, nixpkgs-unstable, nur, niri, fenix, nix-minecraft, home-manager, rust-overlay, sops-nix, agenix, ...} @ inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      nur,
+      niri,
+      fenix,
+      nix-minecraft,
+      home-manager,
+      rust-overlay,
+      sops-nix,
+      agenix,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       overlays = [
@@ -78,26 +92,64 @@
         sops-nix.nixosModules.sops
         agenix.nixosModules.default
       ];
-      globals = let
-        baseName = "minksulivarri.com";
-      in rec {
-        secretsDir = ./modules/common/secrets;
-        user = "minksd";
-        fullName = "Daniel Minks";
-        gitName = fullName;
-      };
-    in rec {
+      globals =
+        let
+          baseName = "minksulivarri.com";
+        in
+        rec {
+          secretsDir = ./modules/common/secrets;
+          user = "minksd";
+          fullName = "Daniel Minks";
+          gitName = fullName;
+        };
+    in
+    rec {
       nixosConfigurations = {
-        minksdHome = import ./minksdHome {inherit system inputs globals overlays imports;};
-        minksdWSL = import ./minksdWSL {inherit system inputs globals overlays imports;};
+        minksdHome = import ./minksdHome {
+          inherit
+            system
+            inputs
+            globals
+            overlays
+            imports
+            ;
+        };
+        minksdWSL = import ./minksdWSL {
+          inherit
+            system
+            inputs
+            globals
+            overlays
+            imports
+            ;
+        };
       };
       homeConfigurations = {
         minksdHome = nixosConfigurations.minksdHome.config.home-manager.users.minksd.home;
         minksdWSL = nixosConfigurations.minksdWSL.config.home-manager.users.minksd.home;
       };
       packages = {
-        minksdHome = system: import ./minksdHome {inherit system inputs globals overlays;};
-        minksdWSL = system: import ./minksdWSL {inherit system inputs globals overlays;};
+        minksdHome =
+          system:
+          import ./minksdHome {
+            inherit
+              system
+              inputs
+              globals
+              overlays
+              ;
+          };
+        minksdWSL =
+          system:
+          import ./minksdWSL {
+            inherit
+              system
+              inputs
+              globals
+              overlays
+              ;
+          };
       };
+      formatter."${system}" = nixpkgs.legacyPackages.${system}.nixfmt-tree;
     };
 }

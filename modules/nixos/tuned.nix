@@ -5,13 +5,14 @@
   lib,
   lpkgs,
   ...
-}: {
+}:
+{
   options = {
     tuned = {
       enable = lib.mkEnableOption "Power and Performance daemon.";
     };
   };
-  
+
   config = lib.mkIf (config.tuned.enable) {
     services.tuned = {
       enable = true;
@@ -22,4 +23,3 @@
     };
   };
 }
-  

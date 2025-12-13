@@ -24,10 +24,10 @@
       extraGroups = [
         "wheel" # Sudo privileges
         "docker" # Allow access to the docker daemon
-        "wireshark" #Allow this user to monitor network interfaces
+        "wireshark" # Allow this user to monitor network interfaces
       ];
     };
-    users.groups.minksd = {};
+    users.groups.minksd = { };
 
     home-manager.users."${config.user}" = {
 
@@ -37,13 +37,11 @@
 
       age.secrets.minksdU2F.file = "${globals.secretsDir}/minksdU2F.age";
       age.secrets.minksdU2F.path = "/home/minksd/.config/Yubico/u2f_keys";
-      
-      xdg = {
 
+      xdg = {
 
         # Allow Nix to manage the default applications list
         mimeApps.enable = true;
-
 
         # Set directories for application defaults
         userDirs = {

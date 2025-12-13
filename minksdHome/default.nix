@@ -17,8 +17,8 @@ in
 inputs.nixpkgs.lib.nixosSystem rec {
   inherit system;
 
-  specialArgs = {};
-  
+  specialArgs = { };
+
   modules = imports ++ [
     ../modules/common
     ../modules/nixos
@@ -27,45 +27,51 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./dnscrypt-proxy.nix
     ./firewall.nix
 
-    ({config, ...}:{
-      config._module.args = {
-        inherit globals inputs;
-        upkgs = import inputs.nixpkgs-unstable {
-          inherit system overlays;
-          config = {
-            allowUnfree = true;
+    (
+      { config, ... }:
+      {
+        config._module.args = {
+          inherit globals inputs;
+          upkgs = import inputs.nixpkgs-unstable {
+            inherit system overlays;
+            config = {
+              allowUnfree = true;
+            };
           };
         };
-      };
-    })
+      }
+    )
 
     #Linux Kernel and nvidia drivers
-    ({config, ...}:{
-      boot.kernelPackages = config._module.args.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
+    (
+      { config, ... }:
+      {
+        boot.kernelPackages = config._module.args.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
 
-      #nvidia/graphics
-      hardware = {
-        nvidia = {
-          package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta; # or vulkan_beta
-          modesetting.enable = true;
-          powerManagement.enable = true;
-          powerManagement.finegrained = false;
-          open = false;
-          nvidiaSettings = true;
+        #nvidia/graphics
+        hardware = {
+          nvidia = {
+            package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta; # or vulkan_beta
+            modesetting.enable = true;
+            powerManagement.enable = true;
+            powerManagement.finegrained = false;
+            open = false;
+            nvidiaSettings = true;
+          };
+          graphics.enable = true;
+          graphics.enable32Bit = true;
+
         };
-        graphics.enable = true;
-        graphics.enable32Bit = true;
+        services.xserver.videoDrivers = [ "nvidia" ];
+        boot.kernelModules = [
+          "nvidia"
+          "nvidia_modeset"
+          "nvidia_uvm"
+          "nvidia_drm"
+        ];
 
-      };
-      services.xserver.videoDrivers = ["nvidia"];
-      boot.kernelModules = [
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
-      ];
-      
-    })
+      }
+    )
 
     #Other config
     {
@@ -153,7 +159,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         enableIPv6 = true;
         useDHCP = true;
         dhcpcd.persistent = true;
-        
+
       };
 
       fonts.packages = builtins.attrValues {

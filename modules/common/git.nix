@@ -1,21 +1,27 @@
-{lib, config, pkgs, ...}:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   options = {
-		git = {
-			enable = lib.mkEnableOption {
-				description = "Enable git.";
-				default = true;
-			};
-		};
-	};
+    git = {
+      enable = lib.mkEnableOption {
+        description = "Enable git.";
+        default = true;
+      };
+    };
+  };
 
-	config = lib.mkIf (config.git.enable) {
+  config = lib.mkIf (config.git.enable) {
 
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs)
         git
         git-credential-oauth
-        gh;
+        gh
+        ;
     };
     programs.git = {
       enable = true;
@@ -32,7 +38,7 @@
         }
       ];
     };
-    
+
     home-manager.users.${config.user} = {
       programs.git = {
         enable = true;
@@ -41,7 +47,7 @@
             name = "Daniel Minks";
             email = "danielminks1230@gmail.com";
           };
-          
+
         };
       };
     };

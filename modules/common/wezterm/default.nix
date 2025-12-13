@@ -1,11 +1,18 @@
-{lib,config, pkgs, ...}:{
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
 
-  options.wezterm.enable = lib.mkEnableOption { default = true;};
+  options.wezterm.enable = lib.mkEnableOption { default = true; };
 
-  config = lib.mkIf (config.wezterm.enable){
+  config = lib.mkIf (config.wezterm.enable) {
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs)
-        wezterm;
+        wezterm
+        ;
     };
 
     home-manager.users.${config.user} = {
@@ -14,5 +21,4 @@
 
   };
 
-    
 }

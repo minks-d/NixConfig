@@ -1,4 +1,10 @@
-{pkgs, lib, config, ...}:{
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   options.hyprlock.enable = lib.mkEnableOption {
     default = false;
   };
@@ -6,7 +12,8 @@
   config = lib.mkIf (config.hyprlock.enable == true) {
     environment.systemPackages = builtins.attrValues {
       inherit (pkgs)
-        hyprlock;
+        hyprlock
+        ;
     };
 
     home-manager.users."${config.user}" = {

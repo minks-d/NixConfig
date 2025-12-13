@@ -1,4 +1,9 @@
-{config, pkgs, lib,...}:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   options = {
     rust = {
@@ -11,10 +16,9 @@
 
   config = lib.mkIf (config.rust.enable) {
     environment.systemPackages = [
-        pkgs.rust-analyzer-nightly
-#        pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default)
+      pkgs.rust-analyzer-nightly
+      #        pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default)
     ];
   };
-      
 
 }

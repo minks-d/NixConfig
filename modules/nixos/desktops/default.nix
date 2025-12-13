@@ -1,6 +1,6 @@
-{...}:
+{ ... }:
 {
-imports = [
-./niri.nix
-];
+  imports = [
+    ./niri.nix
+  ];
 }

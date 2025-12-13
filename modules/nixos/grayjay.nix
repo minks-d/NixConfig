@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   options = {
     grayjay = {
       enable = lib.mkEnableOption {
@@ -17,8 +18,8 @@
     environment.systemPackages = [
       (pkgs.buildFHSUserEnv {
         name = "grayjay";
-        targetPkgs = _:
-          with pkgs; [
+        targetPkgs =
+          _: with pkgs; [
             libz
             icu
             openssl # For updater
@@ -49,8 +50,7 @@
             libGL
             libsecret
           ];
-      })
-      .env
+      }).env
     ];
   };
 }

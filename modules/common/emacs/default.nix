@@ -1,4 +1,9 @@
-{config,pkgs,lib,...}:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   options = {
     emacs = {
@@ -11,9 +16,13 @@
   config = lib.mkIf (config.emacs.enable == true) {
     services.emacs = {
       enable = true;
-      package = let epkgs = pkgs.epkgs; in (
-        (pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
-          epkgs: builtins.attrValues {
+      package =
+        let
+          epkgs = pkgs.epkgs;
+        in
+        ((pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
+          epkgs:
+          builtins.attrValues {
             inherit (epkgs)
               projectile
               helm-projectile
@@ -21,10 +30,10 @@
               eglot
               nix-mode
               lsp-mode
-              rust-mode;
+              rust-mode
+              ;
           }
-        )
-      );
+        ));
       startWithGraphical = false;
       install = true;
     };
@@ -33,7 +42,7 @@
       home.file.".emacs.d/init.el".source = ./init.el;
       home.file.".emacs.d/rust.el".source = ./rust.el;
       home.file.".emacs.d/elixir.el".source = ./elixir.el;
-      
+
     };
   };
 }

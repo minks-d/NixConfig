@@ -4,7 +4,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     nh = {
       enable = lib.mkEnableOption {

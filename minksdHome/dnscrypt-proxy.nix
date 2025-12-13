@@ -1,4 +1,9 @@
-{inputs, pkgs, lib, ...}:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   blocklist_base = builtins.readFile inputs.oisd;
@@ -12,7 +17,7 @@ let
 in
 {
   # See https://wiki.nixos.org/wiki/Encrypted_DNS
-  
+
   networking.nameservers = [
     "::1"
     "127.0.0.1"
@@ -21,14 +26,18 @@ in
 
   services.resolved.enable = lib.mkForce false;
 
-  systemd.services.dnscrypt-proxy.wantedBy = ["network-online.target"]; # So that other services that need network can get dns
+  systemd.services.dnscrypt-proxy.wantedBy = [ "network-online.target" ]; # So that other services that need network can get dns
   services.dnscrypt-proxy = {
     enable = true;
 
     # See https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
     settings = {
-      
-      bootstrap_resolvers = ["1.1.1.1:53" "8.8.8.8:53" "9.9.9.11:53"];
+
+      bootstrap_resolvers = [
+        "1.1.1.1:53"
+        "8.8.8.8:53"
+        "9.9.9.11:53"
+      ];
       sources.odoh-servers = {
         urls = [
           "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/odoh-servers.md"
@@ -52,17 +61,16 @@ in
 
       anonymized_dns = {
         routes = [
-        {
-          server_name = "*";
-          via = ["*"];
-        }
+          {
+            server_name = "*";
+            via = [ "*" ];
+          }
         ];
       };
-        
 
       # Use servers reachable over IPv6 -- Do not enable if you don't have IPv6 connectivity
       ipv6_servers = hasIPv6Internet;
-      block_ipv6 = ! (hasIPv6Internet);
+      block_ipv6 = !(hasIPv6Internet);
 
       odoh_servers = true;
       require_dnssec = true;
@@ -71,7 +79,7 @@ in
 
       http3 = true;
 
-      listen_addresses = ["127.0.0.1:53"] ++ (if (hasIPv6Internet) then ["[::1]:53"] else []);
+      listen_addresses = [ "127.0.0.1:53" ] ++ (if (hasIPv6Internet) then [ "[::1]:53" ] else [ ]);
       blocked_names.blocked_names_file = blocklist_txt;
 
       # If you want, choose a specific set of servers that come from your sources.

@@ -4,7 +4,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     foot = {
       enable = lib.mkEnableOption {

@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   options = {
     zoom = {
       enable = lib.mkEnableOption {
@@ -14,7 +15,7 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.zoom.enable) {
-    unfreePackages = ["zoom"];
-    environment.systemPackages = [pkgs.zoom-us];
+    unfreePackages = [ "zoom" ];
+    environment.systemPackages = [ pkgs.zoom-us ];
   };
 }

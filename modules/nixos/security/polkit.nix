@@ -1,17 +1,20 @@
-{pkgs, lib, ...}:{
+{ pkgs, lib, ... }:
+{
   config = {
     security.polkit = {
       enable = true;
       debug = true;
-      package = pkgs.polkit.overrideAttrs (final: prev: {
-        src = pkgs.fetchFromGitHub {
-          owner = "polkit-org";
-          repo = "polkit";
-          rev = lib.warn "Make sure that you follow up on polkit versions" "7c466c5";
-          hash = "sha256-U3UoRpIT860MFxkGDOsFy+yLZ8FSTnTYYl8fclbYvYw=";
-        };
-        patches = [];
-      });
+      package = pkgs.polkit.overrideAttrs (
+        final: prev: {
+          src = pkgs.fetchFromGitHub {
+            owner = "polkit-org";
+            repo = "polkit";
+            rev = lib.warn "Make sure that you follow up on polkit versions" "7c466c5";
+            hash = "sha256-U3UoRpIT860MFxkGDOsFy+yLZ8FSTnTYYl8fclbYvYw=";
+          };
+          patches = [ ];
+        }
+      );
 
       extraConfig = ''
         polkit.addRule(function(action, subject) {

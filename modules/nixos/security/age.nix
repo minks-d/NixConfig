@@ -1,4 +1,14 @@
-{pkgs, lib, stdenv, config, inputs, globals, system,...}:{
+{
+  pkgs,
+  lib,
+  stdenv,
+  config,
+  inputs,
+  globals,
+  system,
+  ...
+}:
+{
 
   config = {
     environment.systemPackages = [

@@ -1,6 +1,12 @@
-{pkgs, lib, config, ...}:{
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
 
-  options.chrony.enable = lib.mkEnableOption {default = false;};
+  options.chrony.enable = lib.mkEnableOption { default = false; };
 
   config = {
     time.timeZone = "America/New_York";
@@ -32,7 +38,7 @@
         makestep 1.0 3
 
       '';
-      
+
     };
   };
 }

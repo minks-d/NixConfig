@@ -3,29 +3,30 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
-  ./discord.nix
-  ./elixir.nix
-  ./extras.nix
-./firefox.nix
-./foot
-  ./neovim
-  ./ssh.nix
-  ./sway.nix
-  ./teams.nix
-  ./waybar
-  ./xterm.nix
-  ./zoom.nix
-  ./zsh
-  ./emacs
-  ./rust
-  ./git.nix
-  ./direnv.nix
-  ./nh.nix
-  ./time.nix
-  ./wezterm
-  ./i2p.nix
+    ./discord.nix
+    ./elixir.nix
+    ./extras.nix
+    ./firefox.nix
+    ./foot
+    ./neovim
+    ./ssh.nix
+    ./sway.nix
+    ./teams.nix
+    ./waybar
+    ./xterm.nix
+    ./zoom.nix
+    ./zsh
+    ./emacs
+    ./rust
+    ./git.nix
+    ./direnv.nix
+    ./nh.nix
+    ./time.nix
+    ./wezterm
+    ./i2p.nix
   ];
   options = {
     user = lib.mkOption {
@@ -43,10 +44,7 @@
       download = lib.mkOption {
         type = lib.types.str;
         description = "XDG directory for downloads";
-        default =
-          if pkgs.stdenv.isDarwin
-          then "$HOME/Downloads"
-          else "$HOME/downloads";
+        default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
       };
     };
     identityFile = lib.mkOption {
@@ -76,9 +74,7 @@
       type = lib.types.path;
       description = "Path of user's home directory.";
       default = builtins.toPath (
-        if pkgs.stdenv.isDarwin
-        then "/Users/${config.user}"
-        else "/home/${config.user}"
+        if pkgs.stdenv.isDarwin then "/Users/${config.user}" else "/home/${config.user}"
       );
     };
     dotfilesPath = lib.mkOption {
@@ -93,19 +89,21 @@
     unfreePackages = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "List of unfree packages to allow.";
-      default = [];
+      default = [ ];
     };
   };
 
-  config = let
-    stateVersion = "24.05";
-  in {
-    # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-    # using multiple profiles for one user
-    home-manager.useUserPackages = true;
+  config =
+    let
+      stateVersion = "24.05";
+    in
+    {
+      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+      # using multiple profiles for one user
+      home-manager.useUserPackages = true;
 
-    # Pin a state version to prevent warnings
-    home-manager.users.${config.user}.home.stateVersion = stateVersion;
-    home-manager.users.root.home.stateVersion = stateVersion;
-  };
+      # Pin a state version to prevent warnings
+      home-manager.users.${config.user}.home.stateVersion = stateVersion;
+      home-manager.users.root.home.stateVersion = stateVersion;
+    };
 }

@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   options = {
     discord = {
       enable = lib.mkEnableOption {
@@ -14,8 +15,8 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.discord.enable) {
-    unfreePackages = ["discord"];
-    environment.systemPackages = [pkgs.discord-canary];
+    unfreePackages = [ "discord" ];
+    environment.systemPackages = [ pkgs.discord-canary ];
     home-manager.users.${config.user} = {
       xdg.configFile."discord/settings.json".text = ''
         {

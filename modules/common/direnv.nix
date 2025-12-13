@@ -4,7 +4,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     direnv = {
       enable = lib.mkEnableOption {
