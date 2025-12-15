@@ -1,0 +1,8 @@
+  /home/minksd/nixos/modules/common/emacs:
+  drwxr-xr-x  2 minksd minksd 4096 Dec 13 17:57 .
+  drwxr-xr-x 10 minksd minksd 4096 Dec 13 09:54 ..
+  -rw-r--r--  1 minksd minksd 1034 Dec 13 17:44 default.nix
+  -rw-r--r--  1 minksd minksd  179 Dec 13 17:55 elixir.nix
+  -rw-r--r--  1 minksd minksd 1679 Dec 13 17:11 init.el
+  -rw-r--r--  1 minksd minksd  362 Dec 13 17:51 java.nix
+  -rw-r--r--  1 minksd minksd  644 Dec 13 17:54 rust.nix

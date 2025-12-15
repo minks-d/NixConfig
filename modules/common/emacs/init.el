@@ -47,6 +47,9 @@
 ;;Elixir Configuration
 (load "~/.emacs.d/elixir.el")
 
+;;Java Configuration
+(load "~/.emacs.d/java.el")
+
 ;;Enable the nix-mode package, installed in ./default.nix
 (use-package nix-mode
   :mode "\\.nix\\'")
