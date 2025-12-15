@@ -50,9 +50,8 @@
 ;;Java Configuration
 (load "~/.emacs.d/java.el")
 
-;;Enable the nix-mode package, installed in ./default.nix
-(use-package nix-mode
-  :mode "\\.nix\\'")
+;;Nix Configuration
+(load "~/.emacs.d/nix.el")
 
 ;;Adds flycheck for inline syntax checking
 (use-package flycheck)

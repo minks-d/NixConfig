@@ -30,6 +30,7 @@
               eglot
               company
               nix-mode
+              nixd
               lsp-mode
               lsp-java
               rust-mode
@@ -48,5 +49,6 @@
     ./java.nix
     ./elixir.nix
     ./rust.nix
+    ./nix.nix
   ];
 }
