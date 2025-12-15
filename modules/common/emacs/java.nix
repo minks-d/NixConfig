@@ -1,4 +1,5 @@
-{config, pkgs, ...}:{
+{ config, pkgs, ... }:
+{
   config = {
     environment.systemPackages = [
       pkgs.jdt-language-server
@@ -7,12 +8,8 @@
 
     home-manager.users.${config.user} = {
       home.file.".emacs.d/java.el".text = ''
-      ;;; -*- lexical-binding: t -*-
-      ;;; Code:
       (use-package lsp-java
-        :config (add-hook 'java-mode-hook 'lsp)
-                (setq lsp-java-server-install-dir "${pkgs.jdt-language-server}/")
-                (setq lsp-java-java-path "${pkgs.jdk}/bin/"))
+        :config (setq lsp-java-java-path "${pkgs.jdk}/bin/java"))
       '';
     };
   };

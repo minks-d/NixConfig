@@ -160,8 +160,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
         useDHCP = true;
         dhcpcd.persistent = true;
         dhcpcd.extraConfig = ''
-        noarp
-        nodelay
+          noarp
+          nodelay
         '';
 
       };

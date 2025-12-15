@@ -17,9 +17,6 @@
     services.emacs = {
       enable = true;
       package =
-        let
-          epkgs = pkgs.epkgs;
-        in
         ((pkgs.emacsPackagesFor pkgs.emacs-pgtk).emacsWithPackages (
           epkgs:
           builtins.attrValues {
@@ -27,8 +24,8 @@
               projectile
               helm-projectile
               flycheck
-              eglot
               company
+              magit
               nix-mode
               lsp-mode
               lsp-java
