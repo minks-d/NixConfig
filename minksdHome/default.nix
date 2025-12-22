@@ -138,18 +138,20 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       xdg = {
         portal = {
-          xdgOpenUsePortal = true;
           enable = true;
+          xdgOpenUsePortal = true;
+          wlr.enable = true;
           extraPortals = builtins.attrValues {
             inherit (pkgs)
               xdg-desktop-portal
               xdg-desktop-portal-gnome
               xdg-desktop-portal-gtk
+              xdg-desktop-portal-wlr
               ;
 
           };
           config = {
-            common.default = [ "gtk" ];
+            common.default = [ "wlr" ];
           };
         };
       };
