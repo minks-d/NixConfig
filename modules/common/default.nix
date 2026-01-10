@@ -26,6 +26,7 @@
     ./nh.nix
     ./time.nix
     ./wezterm
+    ./alacritty.nix
     ./i2p.nix
   ];
   options = {

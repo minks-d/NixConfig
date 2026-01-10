@@ -47,7 +47,7 @@
           in
           {
             binds = {
-              "Mod+Q".action.spawn = "foot";
+              "Mod+Q".action.spawn = "alacritty";
               "Mod+R".action.spawn = "fuzzel";
               "Mod+P".action = quit;
               "Mod+F".action = fullscreen-window;
