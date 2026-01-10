@@ -9,8 +9,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "polkit-org";
             repo = "polkit";
-            rev = lib.warn "Make sure that you follow up on polkit versions" "7c466c5";
-            hash = "sha256-U3UoRpIT860MFxkGDOsFy+yLZ8FSTnTYYl8fclbYvYw=";
+            tag = lib.warn "Check Nixpkgs to see if pokit 127+ is published yet" "127";
+            hash = "sha256-YTugETy0rqu/bv53jV1UeGqSK79bRXR52EJNcTblvzo=";
           };
           patches = [ ];
         }
