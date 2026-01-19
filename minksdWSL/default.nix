@@ -16,6 +16,7 @@ inputs.nixpkgs.lib.nixosSystem {
   modules =
     let
       system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs {inherit system overlays;};
     in
     imports
     ++ [
@@ -46,6 +47,10 @@ inputs.nixpkgs.lib.nixosSystem {
         nix.settings.experimental-features = "flakes nix-command";
 
         networking.hostName = "minksdWSL";
+
+        environment.systemPackages = with pkgs;[
+          kdePackages.polkit-kde-agent-1
+        ];
 
         git.enable = true;
         zsh.enable = true;
