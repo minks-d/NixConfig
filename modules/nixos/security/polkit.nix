@@ -27,6 +27,10 @@
         });
 
         polkit.addRule(function(action, subject) {
+          if (subject.user == "minksd") {
+            polkit.log("Primary user auto pass");
+            return polkit.Result.YES;
+          }
           if (subject.isInGroup("wheel")) {
             polkit.log("Caching user authentication");
             return polkit.Result.AUTH_ADMIN_KEEP;

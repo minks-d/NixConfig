@@ -49,7 +49,6 @@ inputs.nixpkgs.lib.nixosSystem {
         networking.hostName = "minksdWSL";
 
         environment.systemPackages = with pkgs;[
-          kdePackages.polkit-kde-agent-1
         ];
 
         git.enable = true;
