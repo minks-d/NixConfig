@@ -15,9 +15,8 @@
         packages = let
           pythonPackages = pkgs.python3Packages;
         in {
-          nomadnet = pythonPackages.callPackage ./nomadnet.nix {
-
-          };
+          nomadnet = pythonPackages.callPackage ./nomadnet.nix {};
+          rrcd = pythonPackages.callPackage ./rrcd.nix {};
         };
       };
       flake = {
