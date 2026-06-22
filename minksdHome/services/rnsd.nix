@@ -1,8 +1,15 @@
 {config,...}:
 {
-  config.services.reticulum = {
+  config.services.rnsd = {
     enable = true;
-    nixConfig = {
+    settings = {
+      reticulum = {
+        discover_interfaces = true;
+        autoconnect_discovered_interfaces = 16;
+        enable_transport = false;
+        share_instance = true;
+        instance_name = "default";
+      };
       interfaces = [
         {
           enabled = true;
@@ -14,13 +21,6 @@
           };
         }
       ];
-      settings = {
-        discover_interfaces = true;
-        autoconnect_discovered_interfaces = 16;
-        enable_transport = false;
-        share_instance = true;
-        instance_name = "default";
-      };
     };
   };
 }

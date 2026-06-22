@@ -27,7 +27,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./fs.nix
     ./firewall.nix
     ./services
-
     (
       { config, ... }:
       {
@@ -150,9 +149,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
         #Enable the guix daemon
         guix.enable = true;
         
-        reticulum = {
-          enable = true;
-        };
       };
 
       

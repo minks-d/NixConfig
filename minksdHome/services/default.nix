@@ -1,5 +1,5 @@
 {...}:{
   imports = [
-    ./reticulum.nix
+    ./rnsd.nix
   ];
 }

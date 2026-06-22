@@ -76,6 +76,9 @@
       url = "github:OrbEnforcer/Nihon-Walls";
       flake = false;
     };
+    local-packages = {
+      url = "git+file:./?dir=packages";
+    };
   };
   outputs =
     {
@@ -91,6 +94,7 @@
       rust-overlay,
       sops-nix,
       agenix,
+      local-packages,
       ...
     }@inputs:
     let
@@ -121,9 +125,11 @@
         in
         rec {
           secretsDir = ./modules/common/secrets;
+          packagesDir = ./packages;
           user = "minksd";
           fullName = "Daniel Minks";
           gitName = fullName;
+          inherit self;
         };
     in
     rec {
@@ -194,6 +200,6 @@
           };
 
       };
-      formatter."${system}" = nixpkgs.legacyPackages.${system}.nixfmt-tree;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
     };
 }

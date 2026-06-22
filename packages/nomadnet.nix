@@ -36,4 +36,5 @@ buildPythonApplication (finalAttrs: {
     setuptools
   ];
 
+  meta.license = lib.licenses.unfree;
 })
