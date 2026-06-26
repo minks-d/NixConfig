@@ -78,6 +78,7 @@
     };
     local-packages = {
       url = "git+file:./?dir=packages";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
