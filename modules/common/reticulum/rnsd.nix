@@ -26,7 +26,7 @@ let
           "TCPClientInterface"
           "UDPInterface"
           "I2PInterface"
-          "RNodeLoRaInterface"
+          "RNodeInterface"
           "RNodeMultiInterface"
           "SerialInterface"
           "PipeInterface"
