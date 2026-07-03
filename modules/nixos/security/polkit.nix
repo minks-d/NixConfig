@@ -3,7 +3,9 @@
   config = {
     security.polkit = {
       enable = true;
-      debug = true;
+
+      #No longer available, use extraArgs if needed.
+      #debug = true;
       package = pkgs.polkit;
 
       extraConfig = ''
