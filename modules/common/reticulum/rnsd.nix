@@ -144,15 +144,36 @@ in {
           buildInputs = [ pkgs.makeBinaryWrapper ];
 
           #Tell all bundled utilities where the config directory is
-          postBuild = ''
-    for bin in $out/bin/*; do
-      # Skip wrapping if it's not an executable file
-      [ -f "$bin" ] && [ -x "$bin" ] || continue
-      
-      # Rename the original binary and create a wrapper that appends the config flag
-      wrapProgram "$bin" --add-flags "--config ${cfg.configDir}"
-    done
-  '';
+          postBuild = let
+            #Programs that accept --config for reticulum config location
+            configPrograms = [
+              "rnstatus"
+              "rncp"
+              "rnid"
+              "rnpkg"
+              "rnsd"
+              "rnir"
+              "rnpath"
+              "rnprobe"
+              "rnsh"
+              "rnx"
+            ];
+            #Programs that accept --rnsconfig for reticulum config location
+            rnsConfigPrograms = [
+              "git-remote-rns"
+              "rngit"
+            ];
+            #Programs that do not accept a reticulum config location
+            _otherPrograms = [
+              "rnodeconfig"
+              "rngcs"
+            ];
+            configFunc = next: acc: (lib.concatStringsSep "\n" [acc ''wrapProgram "$out/bin/${next}" --add-flags "--config ${cfg.configDir}"'']);
+            rnsConfigFunc = next: acc: (lib.concatStringsSep "\n" [acc ''wrapProgram "$out/bin/${next}" --add-flags "--rnsconfig ${cfg.configDir}"'']);
+          in lib.concatStringsSep "\n" [
+            (lib.foldr configFunc "" configPrograms)
+            (lib.foldr rnsConfigFunc "" rnsConfigPrograms)
+          ];
         })
       ];
       systemd.services.rnsd = {
