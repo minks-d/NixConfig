@@ -20,6 +20,19 @@
             target_port = "4242";
           };
         }
+        {
+          enabled = true;
+          type = "RNodeInterface";
+          name = "RNode";
+          additionalSettings = {
+            port = "/dev/ttyACM0";
+            frequency = "915875000";
+            bandwidth = "125000";
+            txpower = "15";
+            spreadingfactor = "12";
+            codingrate = "5";
+          };
+        }
       ];
     };
   };
