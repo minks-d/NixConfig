@@ -138,12 +138,11 @@ in {
         }
       ];
       environment.systemPackages = [
+        #Wrap reticulum packages to use the directory specified in cfg.configDir
         (pkgs.symlinkJoin {
           name = "reticulum-wrapped";
           paths = [ pkgs.rns ];
           buildInputs = [ pkgs.makeBinaryWrapper ];
-
-          #Tell all bundled utilities where the config directory is
           postBuild = let
             #Programs that accept --config for reticulum config location
             configPrograms = [
@@ -160,13 +159,15 @@ in {
             ];
             #Programs that accept --rnsconfig for reticulum config location
             rnsConfigPrograms = [
-              "git-remote-rns"
               "rngit"
             ];
             #Programs that do not accept a reticulum config location
             _otherPrograms = [
               "rnodeconfig"
               "rngcs"
+
+              #Accepts from RNS_CONFIG env var
+              "git-remote-rns"
             ];
             configFunc = next: acc: (lib.concatStringsSep "\n" [acc ''wrapProgram "$out/bin/${next}" --add-flags "--config ${cfg.configDir}"'']);
             rnsConfigFunc = next: acc: (lib.concatStringsSep "\n" [acc ''wrapProgram "$out/bin/${next}" --add-flags "--rnsconfig ${cfg.configDir}"'']);
@@ -176,6 +177,9 @@ in {
           ];
         })
       ];
+      environment.variables = {
+        RNS_CONFIG = cfg.configDir;
+      };
       systemd.services.rnsd = {
         enable = true;
         description = "Reticulum Network Stack Daemon";

@@ -77,7 +77,7 @@
       flake = false;
     };
     local-packages = {
-      url = "git+file:./?dir=packages";
+      url = "github:minksd/Packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
