@@ -1,9 +1,7 @@
 {
   config,
-  upkgs,
   pkgs,
   lib,
-  lpkgs,
   ...
 }:
 {

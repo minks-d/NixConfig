@@ -235,19 +235,17 @@
         ]
       },
       "locked": {
-        "dir": "packages",
-        "lastModified": 1782767151,
-        "narHash": "sha256-GZ1KFtrUUeVWLthXEaUCvkZnIBQEEVl7WlK9MjxhGdA=",
-        "ref": "refs/heads/master",
-        "rev": "a9a9b46cef030af6cefd9aefd80b3805716eb886",
-        "revCount": 285,
-        "type": "git",
-        "url": "file:./"
+        "lastModified": 1783453083,
+        "narHash": "sha256-V0N8FPUJF4cRuLJbpe7Y0x6tsSiP5b3PihOqQ8zAluw=",
+        "owner": "minksd",
+        "repo": "Packages",
+        "rev": "a7f768d65e2bfbf03a4f55210c9b02c75121020f",
+        "type": "github"
       },
       "original": {
-        "dir": "packages",
-        "type": "git",
-        "url": "file:./"
+        "owner": "minksd",
+        "repo": "Packages",
+        "type": "github"
       }
     },
     "niri": {

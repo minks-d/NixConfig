@@ -14,27 +14,11 @@ inputs.nixpkgs.lib.nixosSystem {
   };
 
   modules =
-    let
-      system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs { inherit system overlays; };
-    in
     imports
     ++ [
       inputs.home-manager.nixosModules.home-manager
       ../modules/common
       ../modules/nixos
-      (
-        { config, ... }:
-        {
-          config._module.args = {
-            inherit inputs globals;
-            upkgs = import inputs.nixpkgs {
-              inherit overlays;
-              system = "x86_64-linux";
-            };
-          };
-        }
-      )
       inputs.nixos-wsl.nixosModules.default
       {
         wsl = {
@@ -48,7 +32,7 @@ inputs.nixpkgs.lib.nixosSystem {
 
         networking.hostName = "minksdWSL";
 
-        environment.systemPackages = with pkgs; [
+        environment.systemPackages = [
         ];
 
         git.enable = true;

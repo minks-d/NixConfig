@@ -7,14 +7,6 @@
   ...
 }:
 
-let
-  pkgs = import inputs.nixpkgs {
-    inherit system overlays;
-    config = {
-      allowUnfree = true;
-    };
-  };
-in
 inputs.nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -27,27 +19,12 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./fs.nix
     ./firewall.nix
     ./services
-    (
-      { config, ... }:
-      {
-        config._module.args = {
-          inherit globals inputs;
-          upkgs = import inputs.nixpkgs-unstable {
-            inherit system overlays;
-            config = {
-              allowUnfree = true;
-              nvidia.acceptLicense = true;
-            };
-          };
-        };
-      }
-    )
-
+    
     #Linux Kernel and nvidia drivers
     (
       { config, ... }:
       {
-        boot.kernelPackages = config._module.args.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
+        boot.kernelPackages = config.linuxPackages_latest; # or pkgs.linuxKernel.packages.linux_x_xx for specific kernel
 
         #nvidia/graphics
         hardware = {
@@ -75,7 +52,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     )
 
     #Other config
-    {
+    ({pkgs, ...}: {
       nixpkgs = {
         inherit overlays system;
         config = {
@@ -91,11 +68,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
           inherit (pkgs)
             unison
             vial
-            ;
+          ;
           inherit (pkgs.jetbrains)
             idea
             rust-rover
-            ;
+          ;
         };
         variables = {
           EDITOR = "emacs -nw";
@@ -163,7 +140,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
               xdg-desktop-portal-gnome
               xdg-desktop-portal-gtk
               xdg-desktop-portal-wlr
-              ;
+            ;
 
           };
           config = {
@@ -188,10 +165,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
         inherit (pkgs)
           cascadia-code
           ipaexfont
-          ;
+        ;
         inherit (pkgs.nerd-fonts)
           "m+"
-          ;
+        ;
       };
 
       gui.enable = true;
@@ -214,6 +191,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       minecraft.enable = true;
       ddns.enable = true;
       chrony.enable = true;
-    }
+    })
   ];
 }

@@ -6,14 +6,6 @@
   imports,
   ...
 }:
-let
-  pkgs = import inputs.nixpkgs {
-    inherit system overlays;
-    config = {
-      allowUnfree = true;
-    };
-  };
-in
 inputs.nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -25,27 +17,13 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ./firewall.nix
     ./hardware-configuration.nix
     ./noctalia.nix
-    (
-      { config, ... }:
-      {
-        config._module.args = {
-          inherit globals inputs;
-          upkgs = import inputs.nixpkgs-unstable {
-            inherit system overlays;
-            config = {
-              allowUnfree = true;
-            };
-          };
-        };
-      }
-    )
-
+    
     #Linux Kernel
     (
-      { config, ... }:
+      { pkgs, ... }:
       {
 
-        boot.kernelPackages = config._module.args.upkgs.linuxPackages_latest; # or specialArgs.upkgs.linuxKernel.packages.linux_x_xx for specific kernel
+        boot.kernelPackages = pkgs.linuxPackages_latest; # or pkgs.linuxKernel.packages.linux_x_xx for specific kernel
 
         hardware = {
           graphics.enable = true;
@@ -57,7 +35,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     )
 
     #Other config
-    {
+    ({pkgs, ...}:{
       nixpkgs = {
         inherit overlays system;
         config = {
@@ -78,11 +56,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
           inherit (pkgs)
             unison
             vial
-            ;
+          ;
           inherit (pkgs.jetbrains)
             idea
             rust-rover
-            ;
+          ;
         };
         variables = {
           EDITOR = "emacsclient";
@@ -137,7 +115,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
               xdg-desktop-portal-gnome
               xdg-desktop-portal-gtk
               xdg-desktop-portal-wlr
-              ;
+            ;
 
           };
           config = {
@@ -164,10 +142,10 @@ inputs.nixpkgs.lib.nixosSystem rec {
         inherit (pkgs)
           cascadia-code
           ipaexfont
-          ;
+        ;
         inherit (pkgs.nerd-fonts)
           "m+"
-          ;
+        ;
       };
 
       gui.enable = true;
@@ -189,6 +167,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       steam.enable = true;
       lutris.enable = true;
       chrony.enable = true;
-    }
+    })
   ];
 }
