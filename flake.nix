@@ -10,10 +10,9 @@
   };
   inputs = rec {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     lix = {
@@ -29,15 +28,15 @@
 
     home-manager = {
       url = "github:/nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
       url = "github:nix-community/nur";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
       url = "github:/sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     nix-minecraft = {
@@ -47,17 +46,17 @@
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -85,7 +84,6 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       lix-module,
       nur,
       niri,
@@ -132,6 +130,9 @@
           gitName = fullName;
           inherit self;
         };
+      specialArgs = {
+        inherit system overlays inputs globals;
+      };
     in
     rec {
       nixosConfigurations = {
@@ -142,6 +143,7 @@
             globals
             overlays
             imports
+            specialArgs
             ;
         };
         minksdLaptop = import ./minksdLaptop {
@@ -151,7 +153,8 @@
             globals
             overlays
             imports
-            ;
+            specialArgs
+          ;
         };
         minksdWSL = import ./minksdWSL {
           inherit
@@ -160,7 +163,8 @@
             globals
             overlays
             imports
-            ;
+            specialArgs
+          ;
         };
       };
       homeConfigurations = {
@@ -177,7 +181,8 @@
               inputs
               globals
               overlays
-              ;
+              specialArgs
+            ;
           };
         minksdWSL =
           system:
@@ -187,7 +192,8 @@
               inputs
               globals
               overlays
-              ;
+              specialArgs
+            ;
           };
         minksdLaptop =
           system:
@@ -197,7 +203,8 @@
               inputs
               globals
               overlays
-              ;
+              specialArgs
+            ;
           };
 
       };

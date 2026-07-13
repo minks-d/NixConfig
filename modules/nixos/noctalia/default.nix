@@ -26,7 +26,6 @@
         };};
         all-stats = lib.listToAttrs (lib.forEach statTypes sysmonFromType);
       in
-        { config, ... }:
         {
           imports = [
             inputs.noctalia.homeModules.default

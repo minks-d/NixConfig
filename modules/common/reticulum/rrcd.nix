@@ -1,8 +1,9 @@
 {
   config,
-  pkgs,
   lib,
   inputs,
+  pkgs,
+  system,
   ...
 }:
 {
@@ -10,7 +11,7 @@
     enable = lib.mkEnableOption "rrcd";
     package = lib.mkOption {
       type = lib.types.package;
-      default = inputs.local-packages.packages.${pkgs.stdenv.hostPlatform.system}.rrcd;
+      default = inputs.local-packages.packages.${system}.rrcd;
     };
     configDir = lib.mkOption {
       type = lib.types.path;
@@ -128,6 +129,7 @@
       configFile = pkgs.writers.writeTOML "rrcd.toml" cfg.rrcd;
       roomsFile = pkgs.writers.writeTOML "rooms.toml" cfg.rooms;
     in lib.mkIf (cfg.enable) {
+      nixpkgs.config.allowUnfreePredicate = (_: true);
       services.rnsd.enable = true;
       systemd.services.rrcd = {
         enable = true;

@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -36,9 +37,6 @@
             name = "default";
             isDefault = true;
             extensions.packages = builtins.attrValues {
-              inherit (pkgs.nur.repos.rycee.firefox-addons)
-                sidebery
-                ;
             };
             settings = {
             }

@@ -9,7 +9,9 @@
 inputs.nixpkgs.lib.nixosSystem rec {
   inherit system;
 
-  specialArgs = { };
+  specialArgs = {
+    inherit inputs;
+  };
 
   modules = imports ++ [
     ../modules/common

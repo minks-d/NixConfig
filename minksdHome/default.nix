@@ -1,18 +1,24 @@
 {
   system,
-  globals,
   inputs,
   overlays,
   imports,
+  specialArgs,
   ...
 }:
 
-inputs.nixpkgs.lib.nixosSystem rec {
-  inherit system;
-
-  specialArgs = { };
+inputs.nixpkgs.lib.nixosSystem {
+  inherit system specialArgs;
 
   modules = imports ++ [
+    {
+      nixpkgs = {
+        inherit overlays system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    }
     ../modules/common
     ../modules/nixos
     ./boot.nix
@@ -22,9 +28,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
     
     #Linux Kernel and nvidia drivers
     (
-      { config, ... }:
+      {pkgs, config, ... }:
       {
-        boot.kernelPackages = config.linuxPackages_latest; # or pkgs.linuxKernel.packages.linux_x_xx for specific kernel
+        boot.kernelPackages = pkgs.linuxPackages_latest; # or pkgs.linuxKernel.packages.linux_x_xx for specific kernel
 
         #nvidia/graphics
         hardware = {
@@ -52,14 +58,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     )
 
     #Other config
-    ({pkgs, ...}: {
-      nixpkgs = {
-        inherit overlays system;
-        config = {
-          allowUnfree = true;
-          #allowBroken = true;
-        };
-      };
+    ({pkgs, lib, ...}: {
 
       i18n.defaultLocale = "en_US.UTF-8";
 

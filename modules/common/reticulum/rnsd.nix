@@ -137,6 +137,7 @@ in {
                     '';
         }
       ];
+      nixpkgs.config.allowUnfreePredicate = (_: true);
       environment.systemPackages = [
         #Wrap reticulum packages to use the directory specified in cfg.configDir
         (pkgs.symlinkJoin {
