@@ -31,6 +31,9 @@
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 30;
     };
+    kernel.sysctl = {
+      "vm.swappiness" = 20;
+    };
     swraid = {
       enable = true;
       mdadmConf = ''
