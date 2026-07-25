@@ -67,10 +67,8 @@ inputs.nixpkgs.lib.nixosSystem {
           inherit (pkgs)
             unison
             vial
-          ;
-          inherit (pkgs.jetbrains)
-            idea
-            rust-rover
+            pcsx2
+            heroic
           ;
         };
         variables = {
