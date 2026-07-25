@@ -6,17 +6,7 @@
   ...
 }:
 {
-  options = {
-    desktop = {
-      niri = {
-        enable = lib.mkEnableOption {
-          description = "Enable niri WM.";
-          default = false;
-        };
-      };
-    };
-  };
-  config = lib.mkIf (config.gui.enable && config.desktop.niri.enable) {
+  config = lib.mkIf (config.gui.enable && config.minksd.desktopEnv == "niri") {
     environment.systemPackages = with pkgs; [
       bibata-cursors
       fuzzel

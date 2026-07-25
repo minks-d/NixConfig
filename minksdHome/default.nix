@@ -170,11 +170,10 @@ inputs.nixpkgs.lib.nixosSystem {
 
       gui.enable = true;
 
+      minksd.desktopEnv = "plasma";
       tuned.enable = true;
       nh.enable = true;
       direnv.enable = true;
-      desktop.niri.enable = true;
-      noctalia.enable = true;
       zsh.enable = true;
       ghostty.enable = true;
       git.enable = true;

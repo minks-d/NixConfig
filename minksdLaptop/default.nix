@@ -156,8 +156,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       minecraft.enable = false;
       nh.enable = true;
       direnv.enable = true;
-      desktop.niri.enable = true;
-      noctalia.enable = true;
+      minksd.desktopEnv = "plasma";
       alacritty.enable = true;
       zsh.enable = true;
       git.enable = true;
