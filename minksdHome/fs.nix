@@ -11,13 +11,12 @@
       fsType = "vfat";
     };
     "/steam" = {
-      device = "/dev/disk/by-label/SteamGames";
-      fsType = "ntfs-3g";
+      device = "/dev/disk/by-uuid/256011a9-7c27-4596-b7de-b4c3f6106532";
+      fsType = "btrfs";
       options = [
-        "rw"
+        "compress=zstd:3"
+        "noatime"
         "nofail"
-        "uid=3000"
-        "blksize=65536"
       ];
     };
   };
