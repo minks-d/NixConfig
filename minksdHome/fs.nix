@@ -1,5 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  environment.systemPackages = [ pkgs.btrfs-progs ];
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/NIXROOT";
