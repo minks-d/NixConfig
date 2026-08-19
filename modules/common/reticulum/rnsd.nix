@@ -55,7 +55,7 @@ let
   interfacesType = (lib.types.listOf interfaceType);
 in {
   options = {
-    services.rnsd = {
+    minksd.rnsd = {
       enable = lib.mkEnableOption "rnsd";
       configDir = lib.mkOption {
         type = lib.types.path;
@@ -110,7 +110,7 @@ in {
 
   config = let
     utils = import ./utils.nix lib;
-    cfg = config.services.rnsd;
+    cfg = config.minksd.rnsd;
     configFile = let
       reticulumList = (lib.attrsToList cfg.settings.reticulum);
       loggingList = (lib.attrsToList cfg.settings.logging);

@@ -1,6 +1,6 @@
 {config,...}:
 {
-  config.services.rnsd = {
+  config.minksd.rnsd = {
     enable = true;
     settings = {
       reticulum = {

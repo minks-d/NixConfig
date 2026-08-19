@@ -3,7 +3,7 @@
   ...
 }:
 {
-  config.services.rrcd = {
+  config.minksd.rrcd = {
     enable = true;
     rrcd = {
       hub = {

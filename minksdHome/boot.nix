@@ -14,6 +14,7 @@
         "ahci"
         "usbhid"
         "sd_mod"
+
       ];
       kernelModules = [ ];
     };

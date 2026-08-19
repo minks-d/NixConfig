@@ -7,7 +7,7 @@
   ...
 }:
 {
-  options.services.rrcd = {
+  options.minksd.rrcd = {
     enable = lib.mkEnableOption "rrcd";
     package = lib.mkOption {
       type = lib.types.package;
@@ -21,13 +21,13 @@
       hub = {
         configdir = lib.mkOption {
           type = lib.types.path;
-          default = config.services.rnsd.configDir;
+          default = config.minksd.rnsd.configDir;
         };
         identity_path = lib.mkOption {
-          default = "${config.services.rrcd.configDir}/hub_identity";
+          default = "${config.minksd.rrcd.configDir}/hub_identity";
         };
         room_registry_path = lib.mkOption {
-          default = "${config.services.rrcd.configDir}/rooms.toml";
+          default = "${config.minksd.rrcd.configDir}/rooms.toml";
         };
         announce_on_start = lib.mkOption {
           default = true;
@@ -124,13 +124,13 @@
 
   config =
     let
-      cfg = config.services.rrcd;
+      cfg = config.minksd.rrcd;
       stateDir = "/var/lib/rrcd/";
       configFile = pkgs.writers.writeTOML "rrcd.toml" cfg.rrcd;
       roomsFile = pkgs.writers.writeTOML "rooms.toml" cfg.rooms;
     in lib.mkIf (cfg.enable) {
       nixpkgs.config.allowUnfreePredicate = (_: true);
-      services.rnsd.enable = true;
+      minksd.rnsd.enable = true;
       systemd.services.rrcd = {
         enable = true;
         description = "Reticulum Relay Chat Daemon";
@@ -145,7 +145,7 @@
           Restart="always";
           RestartSec=3;
           StateDirectory = "rrcd";
-          ExecStart="${cfg.package}/bin/rrcd --config ${stateDir}/rrcd.toml --configdir ${config.services.rnsd.configDir}";
+          ExecStart="${cfg.package}/bin/rrcd --config ${stateDir}/rrcd.toml --configdir ${config.minksd.rnsd.configDir}";
         };
         preStart = ''
                  mkdir -p ${stateDir}
