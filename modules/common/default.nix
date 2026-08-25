@@ -50,7 +50,7 @@
       download = lib.mkOption {
         type = lib.types.str;
         description = "XDG directory for downloads";
-        default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
+        default = if pkgs.stdenv.hostPlatform.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
       };
     };
     identityFile = lib.mkOption {
@@ -80,7 +80,7 @@
       type = lib.types.path;
       description = "Path of user's home directory.";
       default = builtins.toPath (
-        if pkgs.stdenv.isDarwin then "/Users/${config.user}" else "/home/${config.user}"
+        if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${config.user}" else "/home/${config.user}"
       );
     };
     dotfilesPath = lib.mkOption {
