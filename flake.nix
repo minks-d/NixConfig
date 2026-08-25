@@ -104,11 +104,6 @@
         rust-overlay.overlays.default
         fenix.overlays.default
         nix-minecraft.overlay
-        (_: prev: {
-          openldap = prev.openldap.overrideAttrs {
-            doCheck = builtins.trace "Check if removing this overlay is viable. From: ./flake.nix" (!prev.stdenv.hostPlatform.isi686);
-          };
-        })
       ];
       imports = [
         nix-minecraft.nixosModules.minecraft-servers
