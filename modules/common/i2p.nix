@@ -15,20 +15,24 @@
         {
           services.i2pd = {
             enable = true;
-            enableIPv6 = true;
-            address = "::1";
-            proto = {
+            settings = {
+              address6 = "::1";
+              ipv6 = true;
               http = {
-                enable = true;
+                enabled = true;
                 address = "::1";
-                strictHeaders = false;
+                strictheaders = false;
               };
-              socksProxy.enable = true;
-              socksProxy.address = "::1";
-              httpProxy.enable = true;
-              httpProxy.address = "::1";
-              i2cp.enable = true;
-              i2pControl.enable = true;
+              socksproxy= {
+                enabled = true;
+                address = "::1";
+              };
+              httpproxy = {
+                enabled = true;
+                address = "::1";
+              };
+              i2cp.enabled = true;
+              i2pcontrol.enabled = true;
             };
           };
           networking.firewall = {
