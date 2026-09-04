@@ -81,7 +81,10 @@ inputs.nixpkgs.lib.nixosSystem {
       nix.settings = {
         cores = 4;
         max-jobs = 3;
-        experimental-features = "flakes nix-command";
+        experimental-features = [
+          "flakes"
+          "nix-command"
+        ];
       };
 
       hardware.cpu.intel.updateMicrocode = true;

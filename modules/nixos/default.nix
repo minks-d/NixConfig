@@ -5,7 +5,6 @@
     ./flatpak.nix
     ./gfn.nix
     ./grayjay.nix
-    ./journald.nix
     ./lutris.nix
     ./steam.nix
     ./user.nix
