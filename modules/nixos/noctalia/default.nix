@@ -57,16 +57,6 @@
             theme = {
               builtin = "Kanagawa";
             };
-
-            wallpaper = {
-              directory = "${inputs.wallpapers}/8k Japan/";
-              automation = {
-                enabled = true;
-                interval_seconds = 60;
-                order = "random";
-              };
-              transition_duration = 1500;
-            };
           };
         };
   };

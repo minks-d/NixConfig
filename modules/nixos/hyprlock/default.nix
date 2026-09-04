@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 {
@@ -19,10 +18,6 @@
 
     home-manager.users."${config.user}" = {
       home.file.".config/hypr/hyprlock.conf".source = ./hyprlock.conf;
-      home.file.".config/hypr/wallpapers/" = {
-        recursive = true;
-        source = "${inputs.wallpapers}/8k Japan/";
-      };
     };
   };
 

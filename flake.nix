@@ -71,10 +71,6 @@
       url = "github:cbuijs/oisd";
       flake = false;
     };
-    wallpapers = {
-      url = "github:OrbEnforcer/Nihon-Walls";
-      flake = false;
-    };
     local-packages = {
       url = "github:minksd/Packages";
       inputs.nixpkgs.follows = "nixpkgs";
