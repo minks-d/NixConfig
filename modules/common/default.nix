@@ -111,24 +111,33 @@
             nix-fast-build
             colmena;
         }) ];
+        home-manager.users.${config.user} = {
+          home = {
+            stateVersion = stateVersion;
+          };
+          xdg = {
+            enable = true;
+            userDirs.setSessionVariables = false;
+            configHome = "/home/minksd/.config";
+          };
+        };
+
 
         nix.package = pkgs.lixPackageSets.stable.lix;
-      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-      # using multiple profiles for one user
-      home-manager.useUserPackages = true;
+        # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+        # using multiple profiles for one user
+        home-manager.useUserPackages = true;
 
-      # Pin a state version to prevent warnings
-      home-manager.users.${config.user}.home.stateVersion = stateVersion;
-      home-manager.users.root.home.stateVersion = stateVersion;
+        home-manager.users.root.home.stateVersion = stateVersion;
 
-      networking.hosts = {
-        "192.168.2.1" = [ "minksdHome.localdomain" ];
-        "fd31:bf08:57cb::1" = [ "minksdHome.localdomain" ];
-        "192.168.2.2" = [ "minksdLaptop.localdomain" ];
-        "fd31:bf08:57cb::2" = [ "minksdLaptop.localdomain" ];
+        networking.hosts = {
+          "192.168.2.1" = [ "minksdHome.localdomain" ];
+          "fd31:bf08:57cb::1" = [ "minksdHome.localdomain" ];
+          "192.168.2.2" = [ "minksdLaptop.localdomain" ];
+          "fd31:bf08:57cb::2" = [ "minksdLaptop.localdomain" ];
+        };
+        nix = {
+          distributedBuilds = true;
+        };
       };
-      nix = {
-        distributedBuilds = true;
-      };
-    };
 }

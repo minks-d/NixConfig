@@ -25,6 +25,7 @@
         };
         zsh = {
           enable = true;
+          dotDir = "${config.home-manager.users.${config.user}.xdg.configHome}/zsh";
           oh-my-zsh.enable = true;
           oh-my-zsh.custom = "/home/${config.user}/.zshrc";
           oh-my-zsh.extraConfig = ''

@@ -27,10 +27,12 @@
             "fission.autostart" = true;
             "gfx.webrender.all" = true;
           };
+          hmConfig = config.home-manager.users.${config.user};
         in
         {
           enable = true;
           package = pkgs.firefox;
+          configPath = "${hmConfig.xdg.configHome}/mozilla/firefox";
 
           profiles.default = {
             id = 0;
